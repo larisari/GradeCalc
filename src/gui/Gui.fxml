@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="440.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<VBox prefHeight="494.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
   <children>
     <MenuBar prefWidth="642.0" VBox.vgrow="NEVER">
       <menus>
@@ -83,6 +83,11 @@
             <Label alignment="CENTER" layoutX="81.0" layoutY="65.0" prefHeight="25.0" prefWidth="242.0" text="Vorlesung" textAlignment="CENTER" />
             <Label alignment="CENTER" layoutX="325.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
             <Label alignment="CENTER" layoutX="436.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" text="Note" />
+            <Label fx:id="finalGrade" alignment="CENTER" layoutX="243.0" layoutY="383.0" prefHeight="68.0" prefWidth="154.0" textOverrun="CLIP">
+               <font>
+                  <Font size="56.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

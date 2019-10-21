@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -26,9 +27,13 @@ public class Controller {
   @FXML
   private HBox buttonBox;
   @FXML
-  private CheckBox checkBox;
-  private double garbageFactor = 0.166666667;
+  private CheckBox checkbox;
+  @FXML
+  private Label finalGrade;
+  private final double garbageFactor = 0.166666667;
+  private double garbageECTS;
   private List<Entry> entries;
+  private Entry garbageEntry;
   private String xml;
 
   @FXML
@@ -58,9 +63,9 @@ public class Controller {
   private void handleCalcGrade(MouseEvent mouseEvent) {
 //save all entries into xml file?
     saveEntries();
-    /*
     double sumEcts = 0;
     double ectsWGrade = 0;
+    double grade = 0;
     for (int i = 0; i < ectsBox.getChildren().size() - 1; i++) {
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       if (isInteger(ectsTxt.getText())) {
@@ -72,11 +77,19 @@ public class Controller {
         ectsWGrade += Integer.parseInt(ectsTxt.getText());
       }
     }
-    if (checkBox.isSelected()) {
-      double garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
-      discountGarbageECTS(garbageECTS);
+    for (Entry entry : entries) {
+      grade += entry.getNote() * entry.getECTS();
     }
-*/
+
+    if (checkbox.isSelected()) {
+      garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
+      discountGarbageECTS();
+      if (garbageECTS < 0) {
+        grade += garbageEntry.getNote() * -garbageECTS;
+      }
+    }
+    ectsWGrade -= sumEcts * garbageFactor;
+    finalGrade.setText("" + grade/ectsWGrade);
 
   }
 
@@ -103,21 +116,21 @@ public class Controller {
     return false;
   }
 
-  private void discountGarbageECTS(double garbageECTS) {
+  private void discountGarbageECTS() {
     double max = 0;
     while (garbageECTS > 0) {
-      for (int i = 0; i < noteBox.getChildren().size() - 1; i++) {
-        TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-        if (isNote(noteTxt.getText())) {
-          double note = Double.valueOf(noteTxt.getText());
-          if (note > max) {
-            max = note;
-
-          }
+      for (int i = 0; i < entries.size() - 1; i++) {
+        Double note = entries.get(i).getNote();
+        if (note > max) {
+          garbageEntry = entries.get(i);
+          max = note;
         }
-
       }
+      garbageEntry.setDiscounted();
+      garbageECTS -= garbageEntry.getECTS();
+      max = 0;
     }
+
   }
 
   //TODO note kann nicht in int geparsed werden!!!
