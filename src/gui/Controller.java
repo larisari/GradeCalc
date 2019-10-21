@@ -62,34 +62,34 @@ public class Controller {
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
 //save all entries into xml file?
-    saveEntries();
+    if (entries == null) {
+      saveEntries();
+    }
     double sumEcts = 0;
     double ectsWGrade = 0;
     double grade = 0;
-    for (int i = 0; i < ectsBox.getChildren().size() - 1; i++) {
-      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
-      if (isInteger(ectsTxt.getText())) {
-        sumEcts += Integer.parseInt(ectsTxt.getText());
-      }
+    for (int i = 0; i < entries.size(); i++) {
+      sumEcts += entries.get(i).getECTS();
       //If an entry has a grade (instead of "passed")
-      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!noteTxt.getText().isEmpty() || isNote(noteTxt.getText())) {
-        ectsWGrade += Integer.parseInt(ectsTxt.getText());
+      if (entries.get(i).getNote() > 0) {
+        ectsWGrade += entries.get(i).getECTS();
       }
     }
     for (Entry entry : entries) {
       grade += entry.getNote() * entry.getECTS();
+      ;
     }
-
     if (checkbox.isSelected()) {
       garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
       discountGarbageECTS();
       if (garbageECTS < 0) {
         grade += garbageEntry.getNote() * -garbageECTS;
+        ectsWGrade -= sumEcts * garbageFactor;
       }
     }
-    ectsWGrade -= sumEcts * garbageFactor;
-    finalGrade.setText("" + grade/ectsWGrade);
+
+    finalGrade.setText("" + grade / ectsWGrade);
+    reset();
 
   }
 
@@ -142,11 +142,15 @@ public class Controller {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!vorTxt.getText().isEmpty() && isNote(noteTxt.getText()) && (
-          isInteger(ectsTxt.getText()) || ectsTxt.getText()
+      if (!vorTxt.getText().isEmpty() && isNote(noteTxt.getText()) &&
+          (isInteger(ectsTxt.getText()) || ectsTxt.getText()
               .isEmpty())) {
-        Entry entry = new Entry(vorTxt.getText(), Double.valueOf(noteTxt.getText()),
-            Integer.parseInt(ectsTxt.getText()));
+        double note = 0;
+        if (!noteTxt.getText().isEmpty()) {
+          note = Double.valueOf(noteTxt.getText());
+        }
+
+        Entry entry = new Entry(vorTxt.getText(), note, Integer.parseInt(ectsTxt.getText()));
         entries.add(entry);
       }
     }
@@ -154,6 +158,11 @@ public class Controller {
     xStream.alias("Eintrag", util.Entry.class);
     xml = xStream.toXML(entries);
 
+  }
+
+  private void reset() {
+    garbageECTS = 0;
+    garbageEntry = null;
   }
 
 
