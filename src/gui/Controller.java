@@ -58,12 +58,11 @@ public class Controller {
 
   }
 
-  //TODO eventuell Vorlesung/ECTS/NOTE als Kombi abspeichern? -> leichter zum Note berechnen
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
-//save all entries into xml file?
     if (entries == null) {
       saveEntries();
+      System.out.println("saved entries");
     }
     double sumEcts = 0;
     double ectsWGrade = 0;
@@ -83,9 +82,10 @@ public class Controller {
       garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
       discountGarbageECTS();
       if (garbageECTS < 0) {
-        grade += garbageEntry.getNote() * -garbageECTS;
-        ectsWGrade -= sumEcts * garbageFactor;
+        grade += garbageEntry.getNote() * (-garbageECTS);
+
       }
+      ectsWGrade -= sumEcts * garbageFactor;
     }
 
     finalGrade.setText("" + grade / ectsWGrade);
