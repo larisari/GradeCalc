@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -186,10 +187,17 @@ public class Controller {
     //xStream.alias("Vorlesungen", List.class);
     //xStream.alias("Eintrag", util.Entry.class);
     //xStream.aliasField("gewertet", util.Entry.class, "discounted");
-    try {
-      xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
+    FileChooser chooser = new FileChooser();
+    chooser.setTitle("Speichere deine Datei ab.");
+    Stage stage = (Stage) window.getScene().getWindow();
+    File selectedFile = chooser.showSaveDialog(stage);
+    if (selectedFile != null) {
+      try {
+        xStream.toXML(entries, new FileOutputStream(selectedFile));
+        //  xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -202,10 +210,11 @@ public class Controller {
     chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
-    XStream xStream = new XStream(new DomDriver());
-    List<Entry> uEntries = (List<Entry>) xStream.fromXML(selectedFile);
-    insertEntries(uEntries);
-
+    if (selectedFile != null) {
+      XStream xStream = new XStream(new DomDriver());
+      List<Entry> uEntries = (List<Entry>) xStream.fromXML(selectedFile);
+      insertEntries(uEntries);
+    }
   }
 
   private void insertEntries(List<Entry> uEntries) {

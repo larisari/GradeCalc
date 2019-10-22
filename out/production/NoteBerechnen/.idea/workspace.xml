@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +100,7 @@
       <workItem from="1570435255164" duration="5411000" />
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
-      <workItem from="1571695182293" duration="12046000" />
+      <workItem from="1571695182293" duration="15451000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -149,7 +144,42 @@
       <option name="project" value="LOCAL" />
       <updated>1571740278435</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="upload funktioniert noch nicht aber richtige klasse schon mal gefunden">
+      <created>1571774342175</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1571774342175</updated>
+    </task>
+    <task id="LOCAL-00008" summary="upload öffnet finder fenster in richtigem directory">
+      <created>1571775214287</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1571775214287</updated>
+    </task>
+    <task id="LOCAL-00009" summary="upload funktioniert aber fenster freezed manchmal">
+      <created>1571776739295</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571776739295</updated>
+    </task>
+    <task id="LOCAL-00010" summary="upload funktioniert aber fenster freezed manchmal">
+      <created>1571777201996</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1571777201996</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fenster freeze gefixed">
+      <created>1571777388816</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1571777388816</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +205,10 @@
     <MESSAGE value="moved one line" />
     <MESSAGE value="mülltonne works" />
     <MESSAGE value="Daten werden in xml file lokal gespeichert" />
-    <option name="LAST_COMMIT_MESSAGE" value="Daten werden in xml file lokal gespeichert" />
+    <MESSAGE value="upload funktioniert noch nicht aber richtige klasse schon mal gefunden" />
+    <MESSAGE value="upload öffnet finder fenster in richtigem directory" />
+    <MESSAGE value="upload funktioniert aber fenster freezed manchmal" />
+    <MESSAGE value="fenster freeze gefixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fenster freeze gefixed" />
   </component>
 </project>
