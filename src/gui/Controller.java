@@ -3,7 +3,18 @@ package gui;
 //TODO wenn man Tab drückt soll es horizontal weiter gehen nicht vertikal
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.basic.IntConverter;
+import com.thoughtworks.xstream.converters.basic.StringConverter;
+import com.thoughtworks.xstream.converters.collections.CollectionConverter;
+import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.TypeHierarchyPermission;
+import com.thoughtworks.xstream.security.WildcardTypePermission;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -68,7 +79,6 @@ public class Controller {
     double grade = 0;
     for (int i = 0; i < entries.size(); i++) {
       sumEcts += entries.get(i).getECTS();
-      System.out.println(sumEcts);
       //If an entry has a grade (instead of "passed")
       if (entries.get(i).getNote() > 0) {
         ectsWGrade += entries.get(i).getECTS();
@@ -90,8 +100,7 @@ public class Controller {
         if (!entry.isDiscounted()) {
           grade += entry.getNote() * entry.getECTS();
         }
-        System.out.println(grade);
-        System.out.println(ectsWGrade);
+
       }
     } else {
       for (Entry entry : entries) {
@@ -99,7 +108,6 @@ public class Controller {
 
       }
     }
-//dadurch werden ects von vorlesungen wo nur bestanden is nicht mitgezählt?
     finalGrade.setText("" + grade / ectsWGrade);
     reset();
 
@@ -145,12 +153,10 @@ public class Controller {
     return false;
   }
 
-  //TODO note kann nicht in int geparsed werden!!!
 
   private void saveEntries() {
     entries = new ArrayList<>();
-    // XStream xStream = new XStream(new DomDriver());
-    //-1 oder -2?
+    XStream xStream = new XStream(new DomDriver());
     for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
@@ -166,10 +172,16 @@ public class Controller {
         entries.add(entry);
       }
     }
-   /* xStream.alias("Vorlesungen", List.class);
+    xStream.alias("Vorlesungen", List.class);
     xStream.alias("Eintrag", util.Entry.class);
-    xml = xStream.toXML(entries);
-*/
+    xStream.aliasField("gewertet", util.Entry.class, "discounted");
+    //xml = xStream.toXML(entries);
+    try {
+      xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen.xml")));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
   }
 
   private void reset() {
