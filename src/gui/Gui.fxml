@@ -31,18 +31,11 @@
                <content>
                   <AnchorPane prefHeight="231.0" prefWidth="473.0" style="-fx-background-color: transparent;">
                      <children>
-                        <VBox fx:id="ectsBox" layoutX="252.0" prefHeight="231.0" prefWidth="110.0">
-                           <children>
-                              <TextField />
-                              <TextField />
-                              <TextField />
-                           </children>
-                        </VBox>
                         <VBox fx:id="vorlesungBox" layoutX="8.0" prefHeight="231.0" prefWidth="242.0">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="242.0" />
-                              <TextField />
-                              <TextField />
+                              <TextField prefHeight="25.0" prefWidth="242.0" text="EIP" />
+                              <TextField text="Analysis" />
+                              <TextField text="Digitale Medien" />
                               <HBox fx:id="buttonBox" prefHeight="34.0" prefWidth="242.0">
                                  <children>
                                     <Button fx:id="plusButton1" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
@@ -59,11 +52,18 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <VBox fx:id="ectsBox" layoutX="252.0" prefHeight="231.0" prefWidth="110.0">
+                           <children>
+                              <TextField text="9" />
+                              <TextField text="9" />
+                              <TextField text="6" />
+                           </children>
+                        </VBox>
                         <VBox fx:id="noteBox" alignment="TOP_CENTER" layoutX="364.0" prefHeight="231.0" prefWidth="102.0">
                            <children>
-                              <TextField />
-                              <TextField />
-                              <TextField />
+                              <TextField text="1.7" />
+                              <TextField text="4.0" />
+                              <TextField text="1.0" />
                            </children>
                         </VBox>
                      </children>

@@ -58,68 +58,57 @@ public class Controller {
 
   }
 
+  //TODO gesamtdurchschnitt ohne mülltonne berücksichtigt vorlesungen ohne noten nicht
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
-    if (entries == null) {
-      saveEntries();
-      System.out.println("saved entries");
-    }
+
+    saveEntries();
     double sumEcts = 0;
     double ectsWGrade = 0;
     double grade = 0;
     for (int i = 0; i < entries.size(); i++) {
       sumEcts += entries.get(i).getECTS();
+      System.out.println(sumEcts);
       //If an entry has a grade (instead of "passed")
       if (entries.get(i).getNote() > 0) {
         ectsWGrade += entries.get(i).getECTS();
       }
     }
-    for (Entry entry : entries) {
-      grade += entry.getNote() * entry.getECTS();
-      ;
-    }
+
     if (checkbox.isSelected()) {
       garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
+      System.out.println(garbageECTS);
       discountGarbageECTS();
+      //if one lecture does not count fully
       if (garbageECTS < 0) {
         grade += garbageEntry.getNote() * (-garbageECTS);
 
       }
       ectsWGrade -= sumEcts * garbageFactor;
-    }
+      for (Entry entry : entries) {
+        System.out.println(entry.isDiscounted());
+        if (!entry.isDiscounted()) {
+          grade += entry.getNote() * entry.getECTS();
+        }
+        System.out.println(grade);
+        System.out.println(ectsWGrade);
+      }
+    } else {
+      for (Entry entry : entries) {
+        grade += entry.getNote() * entry.getECTS();
 
+      }
+    }
+//dadurch werden ects von vorlesungen wo nur bestanden is nicht mitgezählt?
     finalGrade.setText("" + grade / ectsWGrade);
     reset();
 
   }
 
-  private boolean isInteger(String number) {
-    try {
-      int validNumber = Integer.parseInt(number);
-      if (validNumber >= 0) {
-        return true;
-      }
-    } catch (NumberFormatException e) {
-    }
-    return false;
-  }
-
-  private boolean isNote(String number) {
-    try {
-      double validNumber = Double.valueOf(number);
-      if (validNumber > 0) {
-        return true;
-      }
-    } catch (NumberFormatException e) {
-
-    }
-    return false;
-  }
-
   private void discountGarbageECTS() {
     double max = 0;
     while (garbageECTS > 0) {
-      for (int i = 0; i < entries.size() - 1; i++) {
+      for (int i = 0; i < entries.size(); i++) {
         Double note = entries.get(i).getNote();
         if (note > max) {
           garbageEntry = entries.get(i);
@@ -133,18 +122,41 @@ public class Controller {
 
   }
 
+  private boolean isInteger(String number) {
+    try {
+      int validNumber = Integer.parseInt(number);
+      if (validNumber > 0) {
+        return true;
+      }
+    } catch (NumberFormatException e) {
+    }
+    return false;
+  }
+
+  private boolean isNote(String number) {
+    try {
+      double validNumber = Double.valueOf(number);
+      if (validNumber >= 0) {
+        return true;
+      }
+    } catch (NumberFormatException e) {
+
+    }
+    return false;
+  }
+
   //TODO note kann nicht in int geparsed werden!!!
 
   private void saveEntries() {
     entries = new ArrayList<>();
-    XStream xStream = new XStream(new DomDriver());
+    // XStream xStream = new XStream(new DomDriver());
+    //-1 oder -2?
     for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!vorTxt.getText().isEmpty() && isNote(noteTxt.getText()) &&
-          (isInteger(ectsTxt.getText()) || ectsTxt.getText()
-              .isEmpty())) {
+      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText().isEmpty())
+          && isInteger(ectsTxt.getText())) {
         double note = 0;
         if (!noteTxt.getText().isEmpty()) {
           note = Double.valueOf(noteTxt.getText());
@@ -154,15 +166,16 @@ public class Controller {
         entries.add(entry);
       }
     }
-    xStream.alias("Vorlesungen", List.class);
+   /* xStream.alias("Vorlesungen", List.class);
     xStream.alias("Eintrag", util.Entry.class);
     xml = xStream.toXML(entries);
-
+*/
   }
 
   private void reset() {
     garbageECTS = 0;
     garbageEntry = null;
+    entries = null;
   }
 
 

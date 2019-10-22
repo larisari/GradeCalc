@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +105,7 @@
       <workItem from="1570435255164" duration="5411000" />
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
-      <workItem from="1571695182293" duration="3483000" />
+      <workItem from="1571695182293" duration="6939000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -124,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571698704973</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="moved one line">
+      <created>1571698912744</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571698912744</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +158,7 @@
     <MESSAGE value="added xStream" />
     <MESSAGE value="note berechnen funktioniert, mülltonne noch nicht" />
     <MESSAGE value="note ohne mülltonne berechnen fehler gefunden, mülltonne funktioniert immer noch nicht" />
-    <option name="LAST_COMMIT_MESSAGE" value="note ohne mülltonne berechnen fehler gefunden, mülltonne funktioniert immer noch nicht" />
+    <MESSAGE value="moved one line" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved one line" />
   </component>
 </project>
