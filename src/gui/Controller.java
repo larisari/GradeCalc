@@ -17,9 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import util.Entry;
 
@@ -178,7 +176,7 @@ public class Controller {
   }
 
   @FXML
-  private void handleDownloadXML(MouseEvent mouseEvent) {
+  private void handleDownloadXML(ActionEvent mouseEvent) {
     XStream xStream = new XStream(new DomDriver());
     xStream.alias("Vorlesungen", List.class);
     xStream.alias("Eintrag", util.Entry.class);
@@ -193,13 +191,20 @@ public class Controller {
 
   //open finder or load latest saved xml file
   @FXML
-  private void handleUploadXML(MouseEvent mouseEvent) {
+  private void handleUploadXML(ActionEvent mouseEvent) {
     FileChooser chooser = new FileChooser();
-    //chooser.setInitialDirectory(new File("/Users/saritasridharan/IntellijProjects/NoteBerechnen/XML\\ Files "));
+    chooser.setInitialDirectory(new File("XML Files"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
     chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
+    XStream xStream = new XStream();
+    List<Entry> uEntries = (List<Entry>) xStream.fromXML(selectedFile);
+    insertEntries(uEntries);
+
+  }
+
+  private void insertEntries(List<Entry> uEntries){
 
   }
 }
