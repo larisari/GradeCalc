@@ -3,18 +3,10 @@ package gui;
 //TODO wenn man Tab drückt soll es horizontal weiter gehen nicht vertikal
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.basic.IntConverter;
-import com.thoughtworks.xstream.converters.basic.StringConverter;
-import com.thoughtworks.xstream.converters.collections.CollectionConverter;
-import com.thoughtworks.xstream.converters.reflection.ReflectionConverter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.TypeHierarchyPermission;
-import com.thoughtworks.xstream.security.WildcardTypePermission;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -25,10 +17,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import util.Entry;
 
 public class Controller {
 
+  @FXML
+  private VBox window;
   @FXML
   private VBox vorlesungBox;
   @FXML
@@ -156,7 +154,6 @@ public class Controller {
 
   private void saveEntries() {
     entries = new ArrayList<>();
-    XStream xStream = new XStream(new DomDriver());
     for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
@@ -172,6 +169,17 @@ public class Controller {
         entries.add(entry);
       }
     }
+  }
+
+  private void reset() {
+    garbageECTS = 0;
+    garbageEntry = null;
+    entries = null;
+  }
+
+  @FXML
+  private void handleDownloadXML(MouseEvent mouseEvent) {
+    XStream xStream = new XStream(new DomDriver());
     xStream.alias("Vorlesungen", List.class);
     xStream.alias("Eintrag", util.Entry.class);
     xStream.aliasField("gewertet", util.Entry.class, "discounted");
@@ -181,14 +189,17 @@ public class Controller {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
-
   }
 
-  private void reset() {
-    garbageECTS = 0;
-    garbageEntry = null;
-    entries = null;
+  //open finder or load latest saved xml file
+  @FXML
+  private void handleUploadXML(MouseEvent mouseEvent) {
+    FileChooser chooser = new FileChooser();
+    //chooser.setInitialDirectory(new File("/Users/saritasridharan/IntellijProjects/NoteBerechnen/XML\\ Files "));
+    chooser.setTitle("Wähle Datei aus, die du laden möchtest");
+    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
+    Stage stage = (Stage) window.getScene().getWindow();
+    File selectedFile = chooser.showOpenDialog(stage);
+
   }
-
-
 }
