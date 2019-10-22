@@ -4,7 +4,10 @@
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +105,7 @@
       <workItem from="1570435255164" duration="5411000" />
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
-      <workItem from="1571695182293" duration="14447000" />
+      <workItem from="1571695182293" duration="14969000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -160,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571775214287</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="upload funktioniert aber fenster freezed manchmal">
+      <created>1571776739295</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571776739295</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +198,7 @@
     <MESSAGE value="Daten werden in xml file lokal gespeichert" />
     <MESSAGE value="upload funktioniert noch nicht aber richtige klasse schon mal gefunden" />
     <MESSAGE value="upload öffnet finder fenster in richtigem directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload öffnet finder fenster in richtigem directory" />
+    <MESSAGE value="upload funktioniert aber fenster freezed manchmal" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload funktioniert aber fenster freezed manchmal" />
   </component>
 </project>

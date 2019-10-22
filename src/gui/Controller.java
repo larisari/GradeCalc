@@ -69,7 +69,6 @@ public class Controller {
 
   }
 
-  //TODO gesamtdurchschnitt ohne mülltonne berücksichtigt vorlesungen ohne noten nicht
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
 
@@ -215,7 +214,7 @@ public class Controller {
     while (vorlLength - 1 < uEntries.size()) {
       addRow();
     }
-    for (int i = 0; i < uEntries.size() - 1; i++) {
+    for (int i = 0; i < uEntries.size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
@@ -237,3 +236,4 @@ public class Controller {
     }
   }
 }
+//TODO add clear button
