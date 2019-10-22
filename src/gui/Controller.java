@@ -41,10 +41,14 @@ public class Controller {
   private double garbageECTS;
   private List<Entry> entries;
   private Entry garbageEntry;
-  private String xml;
+
 
   @FXML
   public void handleAddNewTxtField(MouseEvent mouseEvent) {
+    addRow();
+  }
+
+  private void addRow() {
     vorlesungBox.getChildren().add(new TextField());
     buttonBox.toFront();
     ectsBox.getChildren().add(new TextField());
@@ -175,15 +179,16 @@ public class Controller {
     entries = null;
   }
 
+
   @FXML
   private void handleDownloadXML(ActionEvent mouseEvent) {
+    saveEntries();
     XStream xStream = new XStream(new DomDriver());
-    xStream.alias("Vorlesungen", List.class);
-    xStream.alias("Eintrag", util.Entry.class);
-    xStream.aliasField("gewertet", util.Entry.class, "discounted");
-    //xml = xStream.toXML(entries);
+    //xStream.alias("Vorlesungen", List.class);
+    //xStream.alias("Eintrag", util.Entry.class);
+    //xStream.aliasField("gewertet", util.Entry.class, "discounted");
     try {
-      xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen.xml")));
+      xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
@@ -198,13 +203,37 @@ public class Controller {
     chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
-    XStream xStream = new XStream();
+    XStream xStream = new XStream(new DomDriver());
     List<Entry> uEntries = (List<Entry>) xStream.fromXML(selectedFile);
     insertEntries(uEntries);
 
   }
 
-  private void insertEntries(List<Entry> uEntries){
+  private void insertEntries(List<Entry> uEntries) {
+    clear();
+    int vorlLength = vorlesungBox.getChildren().size();
+    while (vorlLength - 1 < uEntries.size()) {
+      addRow();
+    }
+    for (int i = 0; i < uEntries.size() - 1; i++) {
+      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+      vorTxt.setText(uEntries.get(i).getName());
+      ectsTxt.setText(uEntries.get(i).getECTS().toString());
+      noteTxt.setText(uEntries.get(i).getNote() + "");
+    }
 
+  }
+
+  private void clear() {
+    for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
+      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+      vorTxt.clear();
+      ectsTxt.clear();
+      noteTxt.clear();
+    }
   }
 }
