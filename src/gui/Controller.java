@@ -210,8 +210,7 @@ public class Controller {
 
   private void insertEntries(List<Entry> uEntries) {
     clear();
-    int vorlLength = vorlesungBox.getChildren().size();
-    while (vorlLength - 1 < uEntries.size()) {
+    while (vorlesungBox.getChildren().size() - 1 < uEntries.size()) {
       addRow();
     }
     for (int i = 0; i < uEntries.size(); i++) {
