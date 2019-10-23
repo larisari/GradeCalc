@@ -5,6 +5,7 @@ package gui;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -44,11 +44,17 @@ public class Controller {
   private Entry garbageEntry;
 
 
+  /**
+   * Handles user pressing the "+"-Button to add a new Row of Textfields.
+   */
   @FXML
   public void handleAddNewTxtField(MouseEvent mouseEvent) {
     addRow();
   }
 
+  /**
+   * Adds a new row of TextFields.
+   */
   private void addRow() {
     vorlesungBox.getChildren().add(new TextField());
     buttonBox.toFront();
@@ -56,6 +62,9 @@ public class Controller {
     noteBox.getChildren().add(new TextField());
   }
 
+  /**
+   * Removes a row of TextFields.
+   */
   @FXML
   private void handleRemoveTxtField(MouseEvent mouseEvent) {
     vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 2);
@@ -64,12 +73,11 @@ public class Controller {
 
   }
 
-  //Loads all lectures for Medieninformatik mit MMI
-  @FXML
-  private void handleMMI(ActionEvent actionEvent) {
 
-  }
-
+  /**
+   * Handles user pressing calculate grade Button. Calculates regular average or grades with garbage
+   * rule.
+   */
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
 
@@ -113,7 +121,9 @@ public class Controller {
 
   }
 
-
+  /**
+   * Discounts lectures that fall under the garbage rule.
+   */
   private void discountGarbageECTS() {
     double max = 0;
     while (garbageECTS > 0) {
@@ -124,15 +134,23 @@ public class Controller {
           max = note;
         }
       }
-      garbageEntry.setDiscounted();
-      System.out.println(garbageEntry.getName() + " wird nicht gewertet");
-      garbageECTS -= garbageEntry.getECTS();
-      max = 0;
+      if (garbageEntry != null) {
+        garbageEntry.setDiscounted();
+        System.out.println(garbageEntry.getName() + " wird nicht gewertet");
+        garbageECTS -= garbageEntry.getECTS();
+        max = 0;
+      }
     }
 
   }
 
-  private boolean isInteger(String number) {
+  /**
+   * Checks whether a String is a valid entry for ects.
+   *
+   * @param number - String containing ects.
+   * @return true if String is valid ects.
+   */
+  private boolean isECTS(String number) {
     try {
       int validNumber = Integer.parseInt(number);
       if (validNumber > 0) {
@@ -143,6 +161,12 @@ public class Controller {
     return false;
   }
 
+  /**
+   * Checks whether a String is a valid grade entry.
+   *
+   * @param number - String containing grade.
+   * @return true if String is valid grade.
+   */
   private boolean isNote(String number) {
     try {
       double validNumber = Double.valueOf(number);
@@ -155,7 +179,9 @@ public class Controller {
     return false;
   }
 
-
+  /**
+   * Saves user input into List.
+   */
   private void saveEntries() {
     entries = new ArrayList<>();
     for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
@@ -163,7 +189,7 @@ public class Controller {
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
       if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText().isEmpty())
-          && isInteger(ectsTxt.getText())) {
+          && isECTS(ectsTxt.getText())) {
         double note = 0;
         if (!noteTxt.getText().isEmpty()) {
           note = Double.valueOf(noteTxt.getText());
@@ -175,6 +201,7 @@ public class Controller {
     }
   }
 
+
   private void reset() {
     garbageECTS = 0;
     garbageEntry = null;
@@ -182,6 +209,9 @@ public class Controller {
   }
 
 
+  /**
+   * Handles user pressing "Save as". Saves user input as xml file to local directory.
+   */
   @FXML
   private void handleDownloadXML(ActionEvent mouseEvent) {
     saveEntries();
@@ -203,7 +233,9 @@ public class Controller {
     }
   }
 
-  //open finder or load latest saved xml file
+  /**
+   * Handles user pressing Upload. Uploads saved xml file.
+   */
   @FXML
   private void handleUploadXML(ActionEvent mouseEvent) {
     FileChooser chooser = new FileChooser();
@@ -213,13 +245,18 @@ public class Controller {
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
-      XStream xStream = new XStream(new DomDriver());
-      List<Entry> uEntries = (List<Entry>) xStream.fromXML(selectedFile);
-      insertEntries(uEntries);
+      insertEntries(selectedFile);
     }
   }
 
-  private void insertEntries(List<Entry> uEntries) {
+  /**
+   * Converts uploaded data into list. Inserts data of uploaded xml file into Textfields.
+   *
+   * @param file - uploaded data
+   */
+  private void insertEntries(File file) {
+    XStream xStream = new XStream(new DomDriver());
+    List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
     clear();
     while (vorlesungBox.getChildren().size() - 1 < uEntries.size()) {
       addRow();
@@ -235,6 +272,9 @@ public class Controller {
 
   }
 
+  /**
+   * Clears all Textfields.
+   */
   private void clear() {
     for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
@@ -245,6 +285,41 @@ public class Controller {
       noteTxt.clear();
     }
   }
+
+  //TODO for Testing only
+  @FXML
+  private void clearNote() {
+    for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
+      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+      noteTxt.clear();
+    }
+  }
+
+  @FXML
+  private void handleInfoComp(ActionEvent actionEvent) {
+    uploadFile("InformatikComputerlinguistik.xml");
+  }
+
+  @FXML
+  private void handleMMI(ActionEvent actionEvent) {
+    System.out.println(new File(".").getAbsoluteFile());
+    uploadFile("MedieninformatikMMI.xml");
+  }
+
+  @FXML
+  private void handleMG(ActionEvent actionEvent) {
+    uploadFile("MedieninformatikMG.xml");
+  }
+
+  @FXML
+  private void handleMBWL(ActionEvent actionEvent) {
+    uploadFile("MedieninformatikBWL.xml");
+  }
+
+  private void uploadFile(String filename) {
+    ClassLoader classLoader = getClass().getClassLoader();
+    File file = new File(("XML Files/" + filename));
+    insertEntries(file);
+  }
 }
 //TODO add clear button
-//TODO Berechnung Note funktioniert noch nicht richtig. Normaler Durchschnitt gibt bessere Note als Mülltonne

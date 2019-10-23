@@ -4,7 +4,10 @@
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +105,7 @@
       <workItem from="1570435255164" duration="5411000" />
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
-      <workItem from="1571695182293" duration="17970000" />
+      <workItem from="1571695182293" duration="21742000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -188,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571777961196</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="mülltonne wird jetzt richtig berechnet">
+      <created>1571821449366</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1571821449366</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,20 +229,7 @@
     <MESSAGE value="upload funktioniert aber fenster freezed manchmal" />
     <MESSAGE value="fenster freeze gefixed" />
     <MESSAGE value="added &quot;save as&quot; function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added &quot;save as&quot; function" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/gui/Controller.java</url>
-          <line>116</line>
-          <properties class="gui.Controller" method="discountGarbageECTS">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="mülltonne wird jetzt richtig berechnet" />
+    <option name="LAST_COMMIT_MESSAGE" value="mülltonne wird jetzt richtig berechnet" />
   </component>
 </project>
