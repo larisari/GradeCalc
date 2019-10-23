@@ -4,13 +4,9 @@
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/Start.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui_VBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +108,7 @@
       <workItem from="1570435255164" duration="5411000" />
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
-      <workItem from="1571695182293" duration="30995000" />
+      <workItem from="1571695182293" duration="33492000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -212,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571827104184</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="traversal funktioniert richtig">
+      <created>1571857408291</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1571857408291</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +248,7 @@
     <MESSAGE value="added &quot;save as&quot; function" />
     <MESSAGE value="mülltonne wird jetzt richtig berechnet" />
     <MESSAGE value="upload von vorgefertigten VL zu Studiengängen funktioniert" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload von vorgefertigten VL zu Studiengängen funktioniert" />
+    <MESSAGE value="traversal funktioniert richtig" />
+    <option name="LAST_COMMIT_MESSAGE" value="traversal funktioniert richtig" />
   </component>
 </project>

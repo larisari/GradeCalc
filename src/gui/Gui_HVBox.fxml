@@ -23,9 +23,10 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleDownloadXML" text="Download as..." />
                </items>
         </Menu>
-            <Menu mnemonicParsing="false" text="Help">
+            <Menu mnemonicParsing="false" text="Bearbeiten">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" />
+                  <MenuItem mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" />
               </items>
             </Menu>
       </menus>
@@ -43,7 +44,7 @@
                   </HBox>
                </content>
             </ScrollPane>
-            <CheckBox fx:id="checkbox" layoutX="409.0" layoutY="19.0" mnemonicParsing="false" text="Mülltonnenregelung" />
+            <CheckBox fx:id="checkbox" focusTraversable="false" layoutX="409.0" layoutY="19.0" mnemonicParsing="false" text="Mülltonnenregelung" />
             <Button layoutX="261.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#handleCalcGrade" text="Note berechnen" />
             <Label alignment="CENTER" layoutX="86.0" layoutY="65.0" prefHeight="25.0" prefWidth="242.0" text="Vorlesung" textAlignment="CENTER" />
             <Label alignment="CENTER" layoutX="327.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
@@ -53,8 +54,7 @@
                   <Font size="56.0" />
                </font>
             </Label>
-            <Button layoutX="556.0" layoutY="417.0" mnemonicParsing="false" onMouseClicked="#clearNote" text="Clear" />
-            <MenuButton layoutX="81.0" layoutY="15.0" mnemonicParsing="false" text="Studiengang">
+            <MenuButton focusTraversable="false" layoutX="81.0" layoutY="15.0" mnemonicParsing="false" text="Studiengang">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleInfoComp" text="Informatik mit Computerlinguistik" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMMI" text="Medieninformatik MMI" />
@@ -62,12 +62,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleMBWL" text="Medieninformatik BWL" />
               </items>
             </MenuButton>
-            <Button fx:id="plusButton1" alignment="CENTER" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
+            <Button fx:id="plusButton1" alignment="CENTER" focusTraversable="false" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button fx:id="minusButton" alignment="CENTER" layoutX="120.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleRemoveTxtField" prefHeight="34.0" prefWidth="36.0" text="-">
+            <Button fx:id="minusButton" alignment="CENTER" focusTraversable="false" layoutX="120.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleRemoveTxtField" prefHeight="34.0" prefWidth="36.0" text="-">
                <font>
                   <Font size="17.0" />
                </font>

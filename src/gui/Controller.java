@@ -13,6 +13,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -76,25 +77,22 @@ public class Controller {
   }
 
   private void setTraversalOrder(TextField txt, int vBoxLength) {
-    txt.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-      @Override
-      public void handle(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.TAB) {
-          VBox lastVBox = (VBox) hBox.getChildren().get(hBox.getChildren().size() - 1);
-          if (lastVBox.equals(txt.getParent())) {
-            if (!lastVBox.getChildren().get(lastVBox.getChildren().size() - 1).equals(txt)) {
-              VBox vBox = (VBox) hBox.getChildren().get(0);
+    txt.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+      if (keyEvent.getCode() == KeyCode.TAB) {
+        VBox lastVBox = (VBox) hBox.getChildren().get(hBox.getChildren().size() - 1);
+        if (lastVBox.equals(txt.getParent())) {
+          if (!lastVBox.getChildren().get(lastVBox.getChildren().size() - 1).equals(txt)) {
+            VBox vBox = (VBox) hBox.getChildren().get(0);
+            keyEvent.consume();
+            vBox.getChildren().get(vBoxLength + 1).requestFocus();
+          }
+        } else {
+          for (int i = 0; i < hBox.getChildren().size(); i++) {
+            if (hBox.getChildren().get(i).equals(txt.getParent())) {
+              VBox nextBox = (VBox) hBox.getChildren().get(i + 1);
               keyEvent.consume();
-              vBox.getChildren().get(vBoxLength + 1).requestFocus();
-            }
-          } else {
-            for (int i = 0; i < hBox.getChildren().size(); i++) {
-              if (hBox.getChildren().get(i).equals(txt.getParent())) {
-                VBox nextBox = (VBox) hBox.getChildren().get(i + 1);
-                keyEvent.consume();
-                nextBox.getChildren().get(vBoxLength).requestFocus();
+              nextBox.getChildren().get(vBoxLength).requestFocus();
 
-              }
             }
           }
         }
@@ -107,6 +105,7 @@ public class Controller {
    */
   @FXML
   private void handleRemoveTxtField(MouseEvent mouseEvent) {
+
     if (vorlesungBox.getChildren().size() > 1) {
       vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
       ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
@@ -116,6 +115,22 @@ public class Controller {
     }
   }
 
+  @FXML
+  private void deleteCurrRow(ActionEvent actionEvent) {
+    Scene scene = window.getScene();
+    if (scene.focusOwnerProperty().get() instanceof TextField) {
+      TextField textField = (TextField)scene.focusOwnerProperty().get();
+      VBox box = (VBox) textField.getParent();
+      for (int i = 0; i < box.getChildren().size(); i++) {
+        if (box.getChildren().get(i).equals(textField)) {
+          vorlesungBox.getChildren().remove(i);
+          ectsBox.getChildren().remove(i);
+          noteBox.getChildren().remove(i);
+          box.getChildren().get(i).requestFocus();
+        }
+      }
+    }
+  }
 
   /**
    * Handles user pressing calculate grade Button. Calculates regular average or grades with garbage
@@ -319,6 +334,11 @@ public class Controller {
   /**
    * Clears all Textfields.
    */
+  @FXML
+  private void clearEntries(ActionEvent event) {
+    clear();
+  }
+
   private void clear() {
     for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
@@ -365,5 +385,6 @@ public class Controller {
     File file = new File(("XML Files/" + filename));
     insertEntries(file);
   }
+
 }
 //TODO add clear button
