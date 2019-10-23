@@ -43,12 +43,6 @@ public class Entry {
     }
   }
 
-  public boolean hasNote() {
-    if (this.note == 0) {
-      return false;
-    }
-    return true;
-  }
 
 
 }

@@ -22,6 +22,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -115,11 +118,14 @@ public class Controller {
     }
   }
 
+  /**
+   * Deletes row currently focused and sets focus on TextField underneath.
+   */
   @FXML
   private void deleteCurrRow(ActionEvent actionEvent) {
     Scene scene = window.getScene();
     if (scene.focusOwnerProperty().get() instanceof TextField) {
-      TextField textField = (TextField)scene.focusOwnerProperty().get();
+      TextField textField = (TextField) scene.focusOwnerProperty().get();
       VBox box = (VBox) textField.getParent();
       for (int i = 0; i < box.getChildren().size(); i++) {
         if (box.getChildren().get(i).equals(textField)) {
@@ -168,6 +174,7 @@ public class Controller {
         }
 
       }
+      highlightCountedGrades();
     } else {
       for (Entry entry : entries) {
         grade += entry.getNote() * entry.getECTS();
@@ -176,6 +183,32 @@ public class Controller {
     }
     finalGrade.setText("" + grade / ectsWGrade);
     reset();
+
+  }
+
+
+  private void highlightCountedGrades() {
+    for (int i = 0; i < entries.size(); i++) {
+      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+      if (entries.get(i).isDiscounted()) {
+        vorTxt.setStyle("-fx-text-fill: #9c9c9c");
+        ectsTxt.setStyle("-fx-text-fill: #9c9c9c");
+        noteTxt.setStyle("-fx-text-fill: #9c9c9c");
+//        vorTxt.setFont(Font.font(font, FontWeight.BOLD, 13));
+//        ectsTxt.setFont(Font.font(defaultFont, FontWeight.BOLD, 13));
+//        noteTxt.setFont(Font.font(defaultFont, FontWeight.BOLD, 13));
+      } else {
+        vorTxt.setStyle("-fx-text-fill: black");
+        ectsTxt.setStyle("-fx-text-fill: black");
+        noteTxt.setStyle("-fx-text-fill: black");
+      }
+    }
+  }
+
+  //TODO Problem weil Text wird nur grau bzw schwarz zurückgesetzt wenn mülltonne abgehakelt ist.
+  private void resetTextColor(){
 
   }
 
@@ -296,6 +329,7 @@ public class Controller {
    */
   @FXML
   private void handleUploadXML(ActionEvent mouseEvent) {
+    reset();
     FileChooser chooser = new FileChooser();
     chooser.setInitialDirectory(new File("XML Files"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
@@ -347,6 +381,7 @@ public class Controller {
       vorTxt.clear();
       ectsTxt.clear();
       noteTxt.clear();
+      finalGrade.setText("");
     }
   }
 
