@@ -87,7 +87,7 @@ public class Controller {
 
     if (checkbox.isSelected()) {
       garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
-      System.out.println(garbageECTS);
+
       discountGarbageECTS();
       //if one lecture does not count fully
       if (garbageECTS < 0) {
@@ -113,17 +113,19 @@ public class Controller {
 
   }
 
+
   private void discountGarbageECTS() {
     double max = 0;
     while (garbageECTS > 0) {
       for (int i = 0; i < entries.size(); i++) {
         Double note = entries.get(i).getNote();
-        if (note > max) {
+        if (note > max && !entries.get(i).isDiscounted()) {
           garbageEntry = entries.get(i);
           max = note;
         }
       }
       garbageEntry.setDiscounted();
+      System.out.println(garbageEntry.getName() + " wird nicht gewertet");
       garbageECTS -= garbageEntry.getECTS();
       max = 0;
     }
@@ -193,7 +195,7 @@ public class Controller {
     File selectedFile = chooser.showSaveDialog(stage);
     if (selectedFile != null) {
       try {
-        xStream.toXML(entries, new FileOutputStream(selectedFile));
+        xStream.toXML(entries, new FileOutputStream(selectedFile + ".xml"));
         //  xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
       } catch (FileNotFoundException e) {
         e.printStackTrace();
@@ -245,3 +247,4 @@ public class Controller {
   }
 }
 //TODO add clear button
+//TODO Berechnung Note funktioniert noch nicht richtig. Normaler Durchschnitt gibt bessere Note als Mülltonne
