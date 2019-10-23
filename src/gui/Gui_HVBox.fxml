@@ -8,7 +8,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -33,54 +32,22 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="638.0" VBox.vgrow="ALWAYS">
       <children>
-            <ScrollPane layoutX="72.0" layoutY="90.0" prefHeight="231.0" prefWidth="496.0" style="-fx-background-color: transparent;">
+            <ScrollPane layoutX="85.0" layoutY="90.0" prefHeight="231.0" prefWidth="483.0" style="-fx-background-color: transparent;">
                <content>
-                  <AnchorPane prefHeight="231.0" prefWidth="473.0" style="-fx-background-color: transparent;">
+                  <HBox fx:id="hBox" prefHeight="231.0" prefWidth="461.0">
                      <children>
-                        <VBox fx:id="vorlesungBox" layoutX="8.0" prefHeight="231.0" prefWidth="242.0">
-                           <children>
-                              <TextField prefHeight="25.0" prefWidth="242.0" />
-                              <TextField />
-                              <TextField />
-                              <HBox fx:id="buttonBox" prefHeight="34.0" prefWidth="242.0">
-                                 <children>
-                                    <Button fx:id="plusButton1" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
-                                       <font>
-                                          <Font size="17.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="minusButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleRemoveTxtField" prefHeight="34.0" prefWidth="36.0" text="-">
-                                       <font>
-                                          <Font size="17.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="ectsBox" layoutX="252.0" prefHeight="231.0" prefWidth="110.0">
-                           <children>
-                              <TextField />
-                              <TextField />
-                              <TextField />
-                           </children>
-                        </VBox>
-                        <VBox fx:id="noteBox" alignment="TOP_CENTER" layoutX="364.0" prefHeight="231.0" prefWidth="102.0">
-                           <children>
-                              <TextField />
-                              <TextField />
-                              <TextField />
-                           </children>
-                        </VBox>
+                        <VBox fx:id="vorlesungBox" prefHeight="231.0" prefWidth="242.0" />
+                        <VBox fx:id="ectsBox" prefHeight="231.0" prefWidth="110.0" />
+                        <VBox fx:id="noteBox" alignment="TOP_CENTER" prefHeight="231.0" prefWidth="102.0" />
                      </children>
-                  </AnchorPane>
+                  </HBox>
                </content>
             </ScrollPane>
             <CheckBox fx:id="checkbox" layoutX="409.0" layoutY="19.0" mnemonicParsing="false" text="Mülltonnenregelung" />
             <Button layoutX="261.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#handleCalcGrade" text="Note berechnen" />
-            <Label alignment="CENTER" layoutX="81.0" layoutY="65.0" prefHeight="25.0" prefWidth="242.0" text="Vorlesung" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="325.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
-            <Label alignment="CENTER" layoutX="436.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" text="Note" />
+            <Label alignment="CENTER" layoutX="86.0" layoutY="65.0" prefHeight="25.0" prefWidth="242.0" text="Vorlesung" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="327.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
+            <Label alignment="CENTER" layoutX="437.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" text="Note" />
             <Label fx:id="finalGrade" alignment="CENTER" layoutX="243.0" layoutY="383.0" prefHeight="68.0" prefWidth="154.0" textOverrun="CLIP">
                <font>
                   <Font size="56.0" />
@@ -95,6 +62,17 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleMBWL" text="Medieninformatik BWL" />
               </items>
             </MenuButton>
+            <Button fx:id="plusButton1" alignment="CENTER" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="minusButton" alignment="CENTER" layoutX="120.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleRemoveTxtField" prefHeight="34.0" prefWidth="36.0" text="-">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Label fx:id="promptEntry" layoutX="158.0" layoutY="159.0" prefHeight="46.0" prefWidth="309.0" text="Drücke &quot;+&quot; um einen neuen Eintrag zu erstellen." />
       </children>
     </AnchorPane>
   </children>

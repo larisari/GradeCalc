@@ -11,10 +11,13 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,17 +30,19 @@ public class Controller {
   @FXML
   private VBox window;
   @FXML
+  private HBox hBox;
+  @FXML
   private VBox vorlesungBox;
   @FXML
   private VBox ectsBox;
   @FXML
   private VBox noteBox;
   @FXML
-  private HBox buttonBox;
-  @FXML
   private CheckBox checkbox;
   @FXML
   private Label finalGrade;
+  @FXML
+  private Label promptEntry;
   private final double garbageFactor = 0.166666667;
   private double garbageECTS;
   private List<Entry> entries;
@@ -56,10 +61,45 @@ public class Controller {
    * Adds a new row of TextFields.
    */
   private void addRow() {
-    vorlesungBox.getChildren().add(new TextField());
-    buttonBox.toFront();
-    ectsBox.getChildren().add(new TextField());
-    noteBox.getChildren().add(new TextField());
+    promptEntry.setVisible(false);
+    TextField txt1 = new TextField();
+    TextField txt2 = new TextField();
+    TextField txt3 = new TextField();
+    vorlesungBox.getChildren().add(txt1);
+    ectsBox.getChildren().add(txt2);
+    noteBox.getChildren().add(txt3);
+    int vBoxLength = vorlesungBox.getChildren().size() - 1;
+    setTraversalOrder(txt1, vBoxLength);
+    setTraversalOrder(txt2, vBoxLength);
+    setTraversalOrder(txt3, vBoxLength);
+
+  }
+
+  private void setTraversalOrder(TextField txt, int vBoxLength) {
+    txt.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+      @Override
+      public void handle(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.TAB) {
+          VBox lastVBox = (VBox) hBox.getChildren().get(hBox.getChildren().size() - 1);
+          if (lastVBox.equals(txt.getParent())) {
+            if (!lastVBox.getChildren().get(lastVBox.getChildren().size() - 1).equals(txt)) {
+              VBox vBox = (VBox) hBox.getChildren().get(0);
+              keyEvent.consume();
+              vBox.getChildren().get(vBoxLength + 1).requestFocus();
+            }
+          } else {
+            for (int i = 0; i < hBox.getChildren().size(); i++) {
+              if (hBox.getChildren().get(i).equals(txt.getParent())) {
+                VBox nextBox = (VBox) hBox.getChildren().get(i + 1);
+                keyEvent.consume();
+                nextBox.getChildren().get(vBoxLength).requestFocus();
+
+              }
+            }
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -67,10 +107,13 @@ public class Controller {
    */
   @FXML
   private void handleRemoveTxtField(MouseEvent mouseEvent) {
-    vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 2);
-    ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
-    noteBox.getChildren().remove(noteBox.getChildren().size() - 1);
-
+    if (vorlesungBox.getChildren().size() > 1) {
+      vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
+      ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
+      noteBox.getChildren().remove(noteBox.getChildren().size() - 1);
+    } else {
+      clear();
+    }
   }
 
 
@@ -184,7 +227,7 @@ public class Controller {
    */
   private void saveEntries() {
     entries = new ArrayList<>();
-    for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
+    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
@@ -255,10 +298,11 @@ public class Controller {
    * @param file - uploaded data
    */
   private void insertEntries(File file) {
+    promptEntry.setVisible(false);
     XStream xStream = new XStream(new DomDriver());
     List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
     clear();
-    while (vorlesungBox.getChildren().size() - 1 < uEntries.size()) {
+    while (vorlesungBox.getChildren().size() < uEntries.size()) {
       addRow();
     }
     for (int i = 0; i < uEntries.size(); i++) {
@@ -276,7 +320,7 @@ public class Controller {
    * Clears all Textfields.
    */
   private void clear() {
-    for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
+    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
@@ -289,7 +333,7 @@ public class Controller {
   //TODO for Testing only
   @FXML
   private void clearNote() {
-    for (int i = 0; i < vorlesungBox.getChildren().size() - 1; i++) {
+    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
       noteTxt.clear();
     }

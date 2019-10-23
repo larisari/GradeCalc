@@ -17,7 +17,7 @@ public class Start extends Application {
   public void start(Stage primaryStage) {
     try {
       FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("gui/Gui.fxml"));
+      loader.setLocation(getClass().getResource("gui/Gui_HVBox.fxml"));
       Parent root = loader.load();
       primaryStage.setTitle("GradeCalculator");
       primaryStage.setScene(new Scene(root));
