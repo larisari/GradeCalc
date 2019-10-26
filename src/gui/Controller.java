@@ -146,6 +146,9 @@ public class Controller {
   private void handleCalcGrade(MouseEvent mouseEvent) {
 
     saveEntries();
+    for (int i = 0; i < entries.size(); i++) {
+      setTextColor(i, "black");
+    }
     double sumEcts = 0;
     double ectsWGrade = 0;
     double grade = 0;
@@ -168,7 +171,6 @@ public class Controller {
       }
       ectsWGrade -= sumEcts * garbageFactor;
       for (Entry entry : entries) {
-        System.out.println(entry.isDiscounted());
         if (!entry.isDiscounted()) {
           grade += entry.getNote() * entry.getECTS();
         }
@@ -183,32 +185,40 @@ public class Controller {
     }
     finalGrade.setText("" + grade / ectsWGrade);
     reset();
+    deleteSuperfluousFields();
 
+  }
+
+  private void deleteSuperfluousFields() {
+    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
+      TextField textField = (TextField) vorlesungBox.getChildren().get(i);
+      if (textField.getText().isEmpty()) {
+        vorlesungBox.getChildren().remove(i);
+        ectsBox.getChildren().remove(i);
+        noteBox.getChildren().remove(i);
+      }
+    }
   }
 
 
   private void highlightCountedGrades() {
     for (int i = 0; i < entries.size(); i++) {
-      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
-      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
-      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
       if (entries.get(i).isDiscounted()) {
-        vorTxt.setStyle("-fx-text-fill: #9c9c9c");
-        ectsTxt.setStyle("-fx-text-fill: #9c9c9c");
-        noteTxt.setStyle("-fx-text-fill: #9c9c9c");
-//        vorTxt.setFont(Font.font(font, FontWeight.BOLD, 13));
-//        ectsTxt.setFont(Font.font(defaultFont, FontWeight.BOLD, 13));
-//        noteTxt.setFont(Font.font(defaultFont, FontWeight.BOLD, 13));
+        setTextColor(i, "#9c9c9c");
       } else {
-        vorTxt.setStyle("-fx-text-fill: black");
-        ectsTxt.setStyle("-fx-text-fill: black");
-        noteTxt.setStyle("-fx-text-fill: black");
+        setTextColor(i, "black");
       }
     }
   }
 
   //TODO Problem weil Text wird nur grau bzw schwarz zurückgesetzt wenn mülltonne abgehakelt ist.
-  private void resetTextColor(){
+  private void setTextColor(int index, String color) {
+    TextField vorTxt = (TextField) vorlesungBox.getChildren().get(index);
+    TextField ectsTxt = (TextField) ectsBox.getChildren().get(index);
+    TextField noteTxt = (TextField) noteBox.getChildren().get(index);
+    vorTxt.setStyle("-fx-text-fill: " + color);
+    ectsTxt.setStyle("-fx-text-fill: " + color);
+    noteTxt.setStyle("-fx-text-fill: " + color);
 
   }
 
@@ -297,6 +307,9 @@ public class Controller {
     garbageECTS = 0;
     garbageEntry = null;
     entries = null;
+    for (int i = 0; i < entries.size(); i++) {
+      setTextColor(i, "black");
+    }
   }
 
 
