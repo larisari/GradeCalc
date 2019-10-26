@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -106,7 +108,7 @@
       <workItem from="1570989053603" duration="2329000" />
       <workItem from="1571234202139" duration="16392000" />
       <workItem from="1571695182293" duration="38087000" />
-      <workItem from="1572106718911" duration="1063000" />
+      <workItem from="1572106718911" duration="1892000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -227,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571864273603</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="text schwarz/ausgegraut problem gelöst">
+      <created>1572107840010</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1572107840010</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +272,7 @@
     <MESSAGE value="traversal funktioniert richtig" />
     <MESSAGE value="lösche aktuelle Zeile funktioniert" />
     <MESSAGE value="nicht gewertete Vorlesungen werden ausgegraut.&#10;Problem zurücksetzen auf schwarz funktioniert nicht." />
-    <option name="LAST_COMMIT_MESSAGE" value="nicht gewertete Vorlesungen werden ausgegraut.&#10;Problem zurücksetzen auf schwarz funktioniert nicht." />
+    <MESSAGE value="text schwarz/ausgegraut problem gelöst" />
+    <option name="LAST_COMMIT_MESSAGE" value="text schwarz/ausgegraut problem gelöst" />
   </component>
 </project>

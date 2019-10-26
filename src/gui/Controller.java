@@ -196,6 +196,7 @@ public class Controller {
         vorlesungBox.getChildren().remove(i);
         ectsBox.getChildren().remove(i);
         noteBox.getChildren().remove(i);
+        i -= 1;
       }
     }
   }
@@ -304,12 +305,15 @@ public class Controller {
 
 
   private void reset() {
+    if (!vorlesungBox.getChildren().isEmpty()) {
+      for (int i = 0; i < entries.size(); i++) {
+        setTextColor(i, "black");
+      }
+    }
     garbageECTS = 0;
     garbageEntry = null;
     entries = null;
-    for (int i = 0; i < entries.size(); i++) {
-      setTextColor(i, "black");
-    }
+
   }
 
 
@@ -351,6 +355,8 @@ public class Controller {
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
       insertEntries(selectedFile);
+      saveEntries();
+      deleteSuperfluousFields();
     }
   }
 
