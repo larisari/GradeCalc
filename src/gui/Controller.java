@@ -5,13 +5,15 @@ package gui;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -22,9 +24,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -332,13 +331,38 @@ public class Controller {
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showSaveDialog(stage);
     if (selectedFile != null) {
+      String counter = checkForDuplicate(selectedFile);
       try {
-        xStream.toXML(entries, new FileOutputStream(selectedFile + ".xml"));
+        xStream.toXML(entries, new FileOutputStream(selectedFile + counter + ".xml"));
         //  xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
     }
+  }
+
+  private String checkForDuplicate(File file) {
+    int counter = 0;
+    File temp = new File(file.getPath() + ".xml");
+
+   /* try {
+      temp.createNewFile();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+*/
+    //funktioniert nicht weils nach genau demselben objekt sucht.
+    while (temp.exists()) {
+      counter++;
+      String filename = file.getPath() + counter + ".xml";
+      temp = new File(filename);
+    }
+    if (counter > 0) {
+      System.out.println(counter);
+      return counter + "";
+
+    }
+    return "";
   }
 
   /**
