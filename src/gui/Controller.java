@@ -13,17 +13,22 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -126,13 +131,55 @@ public class Controller {
     if (scene.focusOwnerProperty().get() instanceof TextField) {
       TextField textField = (TextField) scene.focusOwnerProperty().get();
       VBox box = (VBox) textField.getParent();
-      for (int i = 0; i < box.getChildren().size(); i++) {
-        if (box.getChildren().get(i).equals(textField)) {
-          vorlesungBox.getChildren().remove(i);
-          ectsBox.getChildren().remove(i);
-          noteBox.getChildren().remove(i);
-          box.getChildren().get(i).requestFocus();
-        }
+      if (getIndexInParent(textField).isPresent()) {
+        int index = getIndexInParent(textField).getAsInt();
+        vorlesungBox.getChildren().remove(index);
+        ectsBox.getChildren().remove(index);
+        noteBox.getChildren().remove(index);
+        box.getChildren().get(index).requestFocus();
+        entries.remove(index);
+      }
+    }
+
+
+  }
+
+  /**
+   * Returns an Optional of the index of a TextField in its parent, if the TextField exists.
+   *
+   * @param textField from which index should be found
+   */
+  private OptionalInt getIndexInParent(TextField textField) {
+    VBox box = (VBox) textField.getParent();
+    for (int i = 0; i < box.getChildren().size(); i++) {
+      if (box.getChildren().get(i).equals(textField)) {
+        return OptionalInt.of(i);
+      }
+    }
+    return OptionalInt.empty();
+  }
+
+  /**
+   * Adds new row under currently focused row.
+   */
+  @FXML
+  private void addUnderCurrRow(ActionEvent actionEvent) {
+    Scene scene = window.getScene();
+    if (scene.focusOwnerProperty().get() instanceof TextField) {
+      TextField textField = (TextField) scene.focusOwnerProperty().get();
+      if (getIndexInParent(textField).isPresent()) {
+        int i = getIndexInParent(textField).getAsInt();
+        TextField txt1 = new TextField();
+        TextField txt2 = new TextField();
+        TextField txt3 = new TextField();
+        vorlesungBox.getChildren().add(i + 1, txt1);
+        ectsBox.getChildren().add(i + 1, txt2);
+        noteBox.getChildren().add(i + 1, txt3);
+        int vBoxLength = vorlesungBox.getChildren().size() - 1;
+        setTraversalOrder(txt1, vBoxLength);
+        setTraversalOrder(txt2, vBoxLength);
+        setTraversalOrder(txt3, vBoxLength);
+        txt1.requestFocus();
       }
     }
   }
@@ -143,7 +190,6 @@ public class Controller {
    */
   @FXML
   private void handleCalcGrade(MouseEvent mouseEvent) {
-
     saveEntries();
     for (int i = 0; i < entries.size(); i++) {
       setTextColor(i, "black");
@@ -211,7 +257,6 @@ public class Controller {
     }
   }
 
-  //TODO Problem weil Text wird nur grau bzw schwarz zurückgesetzt wenn mülltonne abgehakelt ist.
   private void setTextColor(int index, String color) {
     TextField vorTxt = (TextField) vorlesungBox.getChildren().get(index);
     TextField ectsTxt = (TextField) ectsBox.getChildren().get(index);
@@ -237,7 +282,6 @@ public class Controller {
       }
       if (garbageEntry != null) {
         garbageEntry.setDiscounted();
-        System.out.println(garbageEntry.getName() + " wird nicht gewertet");
         garbageECTS -= garbageEntry.getECTS();
         max = 0;
       }
@@ -345,13 +389,6 @@ public class Controller {
     int counter = 0;
     File temp = new File(file.getPath() + ".xml");
 
-   /* try {
-      temp.createNewFile();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-*/
-    //funktioniert nicht weils nach genau demselben objekt sucht.
     while (temp.exists()) {
       counter++;
       String filename = file.getPath() + counter + ".xml";
@@ -459,10 +496,8 @@ public class Controller {
   }
 
   private void uploadFile(String filename) {
-    ClassLoader classLoader = getClass().getClassLoader();
     File file = new File(("XML Files/" + filename));
     insertEntries(file);
   }
 
 }
-//TODO add clear button

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -19,14 +20,15 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleUploadXML" text="Upload" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleDownloadXML" text="Download as..." />
+                  <MenuItem mnemonicParsing="false" onAction="#handleUploadXML" text="Upload" accelerator="Shortcut+U"/>
+                  <MenuItem mnemonicParsing="false" onAction="#handleDownloadXML" text="Save as..." accelerator="Shortcut+S"/>
                </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Bearbeiten">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" />
-                  <MenuItem mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" />
+                <MenuItem mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" accelerator="Shortcut+D"/>
+                  <MenuItem mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" accelerator="Shortcut+I"/>
+                  <MenuItem mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" accelerator="Shortcut+A"/>
               </items>
             </Menu>
       </menus>
