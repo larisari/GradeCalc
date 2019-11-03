@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import util.Calculator;
 import util.Entry;
 
 public class Controller {
@@ -44,11 +45,10 @@ public class Controller {
   private Label finalGrade;
   @FXML
   private Label promptEntry;
-  private final double garbageFactor = 0.166666667;
-  private double garbageECTS;
+  private double garbageFactor = 0;
   private List<Entry> entries;
-  private Entry garbageEntry;
   private VBox garbageCheck;
+  private Calculator calculator;
 
 //TODO checkboxen anpassen für delete zeile oder add zeile
 
@@ -211,41 +211,14 @@ public class Controller {
     for (int i = 0; i < entries.size(); i++) {
       setTextColor(i, "black");
     }
-    double sumEcts = 0;
-    double ectsWGrade = 0;
-    double grade = 0;
-    for (int i = 0; i < entries.size(); i++) {
-      sumEcts += entries.get(i).getECTS();
-      //If an entry has a grade (instead of "passed")
-      if (entries.get(i).getNote() > 0) {
-        ectsWGrade += entries.get(i).getECTS();
-      }
-    }
 
-    if (checkbox.isSelected()) {
-      garbageECTS = Math.round((sumEcts * garbageFactor) * 100.00) / 100.00;
-
-      discountGarbageECTS();
-      //if one lecture does not count fully
-      if (garbageECTS < 0) {
-        grade += garbageEntry.getNote() * (-garbageECTS);
-
-      }
-      ectsWGrade -= sumEcts * garbageFactor;
-      for (Entry entry : entries) {
-        if (!entry.isDiscounted()) {
-          grade += entry.getNote() * entry.getECTS();
-        }
-
-      }
+    calculator = new Calculator(entries);
+    double grade = calculator.calculate(garbageFactor);
+    if (garbageFactor > 0){
       highlightCountedGrades();
-    } else {
-      for (Entry entry : entries) {
-        grade += entry.getNote() * entry.getECTS();
-
-      }
     }
-    finalGrade.setText("" + grade / ectsWGrade);
+
+    finalGrade.setText("" + grade);
     reset();
     deleteSuperfluousFields();
 
@@ -287,27 +260,6 @@ public class Controller {
 
   }
 
-  /**
-   * Discounts lectures that fall under the garbage rule.
-   */
-  private void discountGarbageECTS() {
-    double max = 0;
-    while (garbageECTS > 0) {
-      for (int i = 0; i < entries.size(); i++) {
-        Double note = entries.get(i).getNote();
-        if (note > max && !entries.get(i).isDiscounted()) {
-          garbageEntry = entries.get(i);
-          max = note;
-        }
-      }
-      if (garbageEntry != null) {
-        garbageEntry.setDiscounted();
-        garbageECTS -= garbageEntry.getECTS();
-        max = 0;
-      }
-    }
-
-  }
 
   /**
    * Checks whether a String is a valid entry for ects.
@@ -351,8 +303,6 @@ public class Controller {
         setTextColor(i, "black");
       }
     }
-    garbageECTS = 0;
-    garbageEntry = null;
     entries = null;
 
   }
@@ -562,6 +512,7 @@ public class Controller {
       setCheckBoxesVisible();
     } else {
       removeCheckboxes();
+      garbageFactor = 0;
     }
   }
 
@@ -582,5 +533,31 @@ public class Controller {
     if (hBox.getChildren().size() > 3) {
       hBox.getChildren().remove(garbageCheck);
     }
+  }
+
+  @FXML
+  private void setFactorMI(ActionEvent actionEvent) {
+    setGarbageFactor(0.166666667);
+  }
+
+  @FXML
+  private void setFactorInfo(ActionEvent actionEvent) {
+    setGarbageFactor(0.166666667);
+  }
+
+  @FXML
+  private void setFactorInfo150(ActionEvent actionEvent) {
+    setGarbageFactor(0.2);
+  }
+
+  @FXML
+  private void setFactorInfo120(ActionEvent actionEvent) {
+    setGarbageFactor(0.15);
+
+  }
+
+  private void setGarbageFactor(double factor) {
+    garbageFactor = factor;
+    checkbox.setSelected(true);
   }
 }

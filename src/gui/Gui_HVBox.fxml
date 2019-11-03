@@ -30,6 +30,14 @@
                   <MenuItem accelerator="Shortcut+A" mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" />
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Mülltonne">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#setFactorMI" text="für Medieninformatik" />
+                  <MenuItem mnemonicParsing="false" onAction="#setFactorInfo" text="für Informatik plus..." />
+                  <MenuItem mnemonicParsing="false" onAction="#setFactorInfo150" text="für Informatik 150 ECTS" />
+                  <MenuItem mnemonicParsing="false" onAction="#setFactorInfo120" text="für Informatik 120 ECTS" />
+              </items>
+            </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="638.0" VBox.vgrow="ALWAYS">
