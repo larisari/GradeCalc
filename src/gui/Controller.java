@@ -50,6 +50,7 @@ public class Controller {
   private Entry garbageEntry;
   private VBox garbageCheck;
 
+//TODO checkboxen anpassen für delete zeile oder add zeile
 
   /**
    * Handles user pressing the "+"-Button to add a new Row of Textfields.
@@ -74,8 +75,15 @@ public class Controller {
     setTraversalOrder(txt1, vBoxLength);
     setTraversalOrder(txt2, vBoxLength);
     setTraversalOrder(txt3, vBoxLength);
+    if (checkbox.isSelected()) {
+      CheckBox box = new CheckBox();
+      box.getStyleClass().add("checkBox");
+      garbageCheck.getChildren().add(box);
+    }
 
   }
+
+  //TODO anpassen für wenn checkboxen aktiv sind
 
   private void setTraversalOrder(TextField txt, int vBoxLength) {
     txt.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
@@ -111,6 +119,9 @@ public class Controller {
       vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
       ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
       noteBox.getChildren().remove(noteBox.getChildren().size() - 1);
+      if (checkbox.isSelected()) {
+        garbageCheck.getChildren().remove(garbageCheck.getChildren().size() - 1);
+      }
     } else {
       clear();
     }
@@ -130,6 +141,9 @@ public class Controller {
         vorlesungBox.getChildren().remove(index);
         ectsBox.getChildren().remove(index);
         noteBox.getChildren().remove(index);
+        if (checkbox.isSelected()) {
+          garbageCheck.getChildren().remove(index);
+        }
         box.getChildren().get(index).requestFocus();
         entries.remove(index);
       }
@@ -169,6 +183,13 @@ public class Controller {
         vorlesungBox.getChildren().add(i + 1, txt1);
         ectsBox.getChildren().add(i + 1, txt2);
         noteBox.getChildren().add(i + 1, txt3);
+
+        if (checkbox.isSelected()) {
+          CheckBox box = new CheckBox();
+          box.getStyleClass().add("checkBox");
+          garbageCheck.getChildren().add(i + 1, box);
+        }
+
         int vBoxLength = vorlesungBox.getChildren().size() - 1;
         setTraversalOrder(txt1, vBoxLength);
         setTraversalOrder(txt2, vBoxLength);
@@ -177,6 +198,8 @@ public class Controller {
       }
     }
   }
+
+  //TODO anpassen für checkboxen
 
   /**
    * Handles user pressing calculate grade Button. Calculates regular average or grades with garbage
@@ -235,6 +258,9 @@ public class Controller {
         vorlesungBox.getChildren().remove(i);
         ectsBox.getChildren().remove(i);
         noteBox.getChildren().remove(i);
+        if (!garbageCheck.getChildren().isEmpty()) {
+          garbageCheck.getChildren().remove(i);
+        }
         i -= 1;
       }
     }
@@ -318,28 +344,6 @@ public class Controller {
     return false;
   }
 
-  /**
-   * Saves user input into List.
-   */
-  private void saveEntries() {
-    entries = new ArrayList<>();
-    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
-      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
-      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
-      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText().isEmpty())
-          && isECTS(ectsTxt.getText())) {
-        double note = 0;
-        if (!noteTxt.getText().isEmpty()) {
-          note = Double.valueOf(noteTxt.getText());
-        }
-
-        Entry entry = new Entry(vorTxt.getText(), note, Integer.parseInt(ectsTxt.getText()));
-        entries.add(entry);
-      }
-    }
-  }
-
 
   private void reset() {
     if (!vorlesungBox.getChildren().isEmpty()) {
@@ -411,6 +415,8 @@ public class Controller {
     }
   }
 
+  //TODO anpassen für checkboxen, muss iwie erkennen wenn mülltonnenwerte mitabgespeichert wurden
+
   /**
    * Converts uploaded data into list. Inserts data of uploaded xml file into Textfields.
    *
@@ -420,10 +426,15 @@ public class Controller {
     promptEntry.setVisible(false);
     XStream xStream = new XStream(new DomDriver());
     List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
-    clear();
+
+    if (!vorlesungBox.getChildren().isEmpty()) {
+      clear();
+    }
     while (vorlesungBox.getChildren().size() < uEntries.size()) {
       addRow();
     }
+    setCheckBoxesVisible();
+    int counter = 0;
     for (int i = 0; i < uEntries.size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
@@ -431,8 +442,47 @@ public class Controller {
       vorTxt.setText(uEntries.get(i).getName());
       ectsTxt.setText(uEntries.get(i).getECTS().toString());
       noteTxt.setText(uEntries.get(i).getNote() + "");
+      if (uEntries.get(i).isGarbageEligible()) {
+        CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
+        box.setSelected(true);
+        counter++;
+        checkbox.setSelected(true);
+      }
+    }
+    if (counter == 0) {
+      removeCheckboxes();
     }
 
+  }
+
+  /**
+   * Saves user input into List.
+   */
+  private void saveEntries() {
+    entries = new ArrayList<>();
+    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
+      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText().isEmpty())
+          && isECTS(ectsTxt.getText())) {
+        double note = 0;
+        if (!noteTxt.getText().isEmpty()) {
+          note = Double.valueOf(noteTxt.getText());
+        }
+
+        Entry entry = new Entry(vorTxt.getText(), note, Integer.parseInt(ectsTxt.getText()));
+
+        if (checkbox.isSelected()) {
+          CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
+          if (box.isSelected()) {
+            entry.setGarbEligible();
+          }
+        }
+        entries.add(entry);
+
+      }
+    }
   }
 
   /**
@@ -451,8 +501,14 @@ public class Controller {
       vorTxt.clear();
       ectsTxt.clear();
       noteTxt.clear();
-      finalGrade.setText("");
+      removeCheckboxes();
+      /*if (checkbox.isSelected()) {
+        CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
+        box.setSelected(false);
+      }*/
     }
+    finalGrade.setText("");
+    checkbox.setSelected(false);
   }
 
   //TODO for Testing only
@@ -471,7 +527,6 @@ public class Controller {
 
   @FXML
   private void handleMMI(ActionEvent actionEvent) {
-    System.out.println(new File(".").getAbsoluteFile());
     uploadFile("MedieninformatikMMI.xml");
   }
 
@@ -488,6 +543,7 @@ public class Controller {
   private void uploadFile(String filename) {
     File file = new File(("XML Files/" + filename));
     insertEntries(file);
+    saveEntries();
   }
 
   @FXML
@@ -503,15 +559,28 @@ public class Controller {
   @FXML
   private void enableGarbageBoxes(MouseEvent mouseEvent) {
     if (checkbox.isSelected()) {
-      garbageCheck = new VBox();
-      while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
-        CheckBox box = new CheckBox();
-        box.getStyleClass().add("checkBox");
-        garbageCheck.getChildren().add(box);
-      }
-      hBox.getChildren().add(0, garbageCheck);
+      setCheckBoxesVisible();
     } else {
-      hBox.getChildren().remove(0);
+      removeCheckboxes();
+    }
+  }
+
+  private void setCheckBoxesVisible() {
+    //  if (garbageCheck == null || garbageCheck.getChildren()
+    //    .isEmpty()) {     //könnte exception schmeißen, geht bei UPLOAD nicht hier rein weil garbageCheck nicht leer.
+    garbageCheck = new VBox();
+    while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
+      CheckBox box = new CheckBox();
+      box.getStyleClass().add("checkBox");
+      garbageCheck.getChildren().add(box);
+    }
+    hBox.getChildren().add(0, garbageCheck);
+    //}
+  }
+
+  private void removeCheckboxes() {
+    if (hBox.getChildren().size() > 3) {
+      hBox.getChildren().remove(garbageCheck);
     }
   }
 }

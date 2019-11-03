@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/Start.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui_VBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Entry.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +115,7 @@
       <workItem from="1571234202139" duration="16392000" />
       <workItem from="1571695182293" duration="38087000" />
       <workItem from="1572106718911" duration="5692000" />
-      <workItem from="1572785407457" duration="8175000" />
+      <workItem from="1572785407457" duration="14608000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -275,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572792042963</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="checkboxes appear next to lectures upon clicking &quot;mülltonnenregelung&quot;">
+      <created>1572796817569</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1572796817569</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +320,23 @@
     <MESSAGE value="add new row inbetween works&#10;added shortcuts" />
     <MESSAGE value="added info button for garbage rule" />
     <MESSAGE value="added info button for garbage rule, works" />
-    <option name="LAST_COMMIT_MESSAGE" value="added info button for garbage rule, works" />
+    <MESSAGE value="checkboxes appear next to lectures upon clicking &quot;mülltonnenregelung&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkboxes appear next to lectures upon clicking &quot;mülltonnenregelung&quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gui/Controller.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gui/Controller.java</url>
+          <line>410</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

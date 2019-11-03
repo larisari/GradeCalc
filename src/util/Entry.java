@@ -5,6 +5,7 @@ public class Entry {
   private String name;
   private double note;
   private Integer ects;
+  private boolean garbEligible;
   private boolean discounted;
 
 
@@ -35,6 +36,18 @@ public class Entry {
     discounted = true;
   }
 
+  public boolean isGarbageEligible() {
+    if (garbEligible) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public void setGarbEligible() {
+    garbEligible = true;
+  }
+
   public boolean isDiscounted() {
     if (discounted) {
       return true;
@@ -42,7 +55,6 @@ public class Entry {
       return false;
     }
   }
-
 
 
 }
