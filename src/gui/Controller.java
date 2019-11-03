@@ -1,6 +1,5 @@
 package gui;
 
-//TODO wenn man Tab drückt soll es horizontal weiter gehen nicht vertikal
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -8,11 +7,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
@@ -21,16 +16,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import util.Entry;
@@ -57,6 +48,7 @@ public class Controller {
   private double garbageECTS;
   private List<Entry> entries;
   private Entry garbageEntry;
+  private VBox garbageCheck;
 
 
   /**
@@ -369,9 +361,6 @@ public class Controller {
   private void handleDownloadXML(ActionEvent mouseEvent) {
     saveEntries();
     XStream xStream = new XStream(new DomDriver());
-    //xStream.alias("Vorlesungen", List.class);
-    //xStream.alias("Eintrag", util.Entry.class);
-    //xStream.aliasField("gewertet", util.Entry.class, "discounted");
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Speichere deine Datei ab.");
     Stage stage = (Stage) window.getScene().getWindow();
@@ -380,7 +369,6 @@ public class Controller {
       String counter = checkForDuplicate(selectedFile);
       try {
         xStream.toXML(entries, new FileOutputStream(selectedFile + counter + ".xml"));
-        //  xStream.toXML(entries, new FileOutputStream(new File("XML Files/Vorlesungen1.xml")));
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
@@ -507,8 +495,23 @@ public class Controller {
     String url = "http://www2.tcs.ifi.lmu.de/~letz/informationen.shtml#Muelltonnenregelung";
     try {
       Desktop.getDesktop().browse(new URL(url).toURI());
-    } catch (Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+
+  @FXML
+  private void enableGarbageBoxes(MouseEvent mouseEvent) {
+    if (checkbox.isSelected()) {
+      garbageCheck = new VBox();
+      while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
+        CheckBox box = new CheckBox();
+        box.getStyleClass().add("checkBox");
+        garbageCheck.getChildren().add(box);
+      }
+      hBox.getChildren().add(0, garbageCheck);
+    } else {
+      hBox.getChildren().remove(0);
     }
   }
 }

@@ -19,8 +19,10 @@ public class Start extends Application {
       FXMLLoader loader = new FXMLLoader();
       loader.setLocation(getClass().getResource("gui/Gui_HVBox.fxml"));
       Parent root = loader.load();
+      Scene scene = new Scene(root);
+      scene.getStylesheets().add("util/boxStyler.css");
       primaryStage.setTitle("GradeCalculator");
-      primaryStage.setScene(new Scene(root));
+      primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
       e.printStackTrace();

@@ -19,22 +19,22 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleUploadXML" text="Upload" accelerator="Shortcut+U"/>
-                  <MenuItem mnemonicParsing="false" onAction="#handleDownloadXML" text="Save as..." accelerator="Shortcut+S"/>
+                  <MenuItem accelerator="Shortcut+U" mnemonicParsing="false" onAction="#handleUploadXML" text="Upload" />
+                  <MenuItem accelerator="Shortcut+S" mnemonicParsing="false" onAction="#handleDownloadXML" text="Save as..." />
                </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Bearbeiten">
               <items>
-                <MenuItem accelerator="Shortcut+D" mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile"/>
-                  <MenuItem mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" accelerator="Shortcut+I"/>
-                  <MenuItem mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" accelerator="Shortcut+A"/>
+                <MenuItem accelerator="Shortcut+D" mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" />
+                  <MenuItem accelerator="Shortcut+I" mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" />
+                  <MenuItem accelerator="Shortcut+A" mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" />
               </items>
             </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="638.0" VBox.vgrow="ALWAYS">
       <children>
-            <ScrollPane layoutX="85.0" layoutY="90.0" prefHeight="231.0" prefWidth="483.0" style="-fx-background-color: transparent;">
+            <ScrollPane layoutX="90.0" layoutY="90.0" prefHeight="231.0" prefWidth="485.0" style="-fx-background-color: transparent;">
                <content>
                   <HBox fx:id="hBox" prefHeight="231.0" prefWidth="461.0">
                      <children>
@@ -45,11 +45,11 @@
                   </HBox>
                </content>
             </ScrollPane>
-            <CheckBox fx:id="checkbox" focusTraversable="false" layoutX="409.0" layoutY="19.0" mnemonicParsing="false" text="Mülltonnenregelung" />
+            <CheckBox fx:id="checkbox" focusTraversable="false" layoutX="409.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#enableGarbageBoxes" text="Mülltonnenregelung" />
             <Button layoutX="261.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#handleCalcGrade" text="Note berechnen" />
             <Label alignment="CENTER" layoutX="86.0" layoutY="65.0" prefHeight="25.0" prefWidth="242.0" text="Vorlesung" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="327.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
-            <Label alignment="CENTER" layoutX="437.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" text="Note" />
+            <Label alignment="CENTER" layoutX="332.0" layoutY="65.0" prefHeight="25.0" prefWidth="110.0" text="ECTS" />
+            <Label alignment="CENTER" layoutX="441.0" layoutY="65.0" prefHeight="25.0" prefWidth="104.0" text="Note" />
             <Label fx:id="finalGrade" alignment="CENTER" layoutX="243.0" layoutY="383.0" prefHeight="68.0" prefWidth="154.0" textOverrun="CLIP">
                <font>
                   <Font size="56.0" />
