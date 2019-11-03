@@ -4,10 +4,12 @@ package gui;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -500,4 +502,13 @@ public class Controller {
     insertEntries(file);
   }
 
+  @FXML
+  private void openGarbageInfo(MouseEvent mouseEvent) {
+    String url = "http://www2.tcs.ifi.lmu.de/~letz/informationen.shtml#Muelltonnenregelung";
+    try {
+      Desktop.getDesktop().browse(new URL(url).toURI());
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+  }
 }

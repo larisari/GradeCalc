@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,6 +91,9 @@
       </method>
     </configuration>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -108,7 +110,7 @@
       <workItem from="1571234202139" duration="16392000" />
       <workItem from="1571695182293" duration="38087000" />
       <workItem from="1572106718911" duration="5692000" />
-      <workItem from="1572785407457" duration="850000" />
+      <workItem from="1572785407457" duration="5080000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -250,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572113237654</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="add new row inbetween works&#10;added shortcuts">
+      <created>1572791663680</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1572791663680</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,6 +298,7 @@
     <MESSAGE value="text schwarz/ausgegraut problem gelöst" />
     <MESSAGE value="überflüssige zeilen werden bei berechnung oder neuem upload gelöscht" />
     <MESSAGE value="if file name already exists, add counter and increment per save" />
-    <option name="LAST_COMMIT_MESSAGE" value="if file name already exists, add counter and increment per save" />
+    <MESSAGE value="add new row inbetween works&#10;added shortcuts" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new row inbetween works&#10;added shortcuts" />
   </component>
 </project>

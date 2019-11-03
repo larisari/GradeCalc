@@ -8,7 +8,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -26,7 +25,7 @@
         </Menu>
             <Menu mnemonicParsing="false" text="Bearbeiten">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" accelerator="Shortcut+D"/>
+                <MenuItem accelerator="Shortcut+D" mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile"/>
                   <MenuItem mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" accelerator="Shortcut+I"/>
                   <MenuItem mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" accelerator="Shortcut+A"/>
               </items>
@@ -75,6 +74,7 @@
                </font>
             </Button>
             <Label fx:id="promptEntry" layoutX="158.0" layoutY="159.0" prefHeight="46.0" prefWidth="309.0" text="Drücke &quot;+&quot; um einen neuen Eintrag zu erstellen." />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="20.0" maxHeight="25.0" maxWidth="27.0" mnemonicParsing="false" onMouseClicked="#openGarbageInfo" prefHeight="25.0" prefWidth="27.0" style="-fx-background-radius: 5em; -fx-min-height: 18px; -fx-min-width: 18px; -fx-max-height: 18px; -fx-max-width: 18px; -fx-padding: 0px;" text="?" textAlignment="CENTER" textFill="#545353" />
       </children>
     </AnchorPane>
   </children>
