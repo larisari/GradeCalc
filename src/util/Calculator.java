@@ -56,7 +56,7 @@ public class Calculator {
     while (garbageECTS > 0) {
       for (Entry entry : entries) {
         Double note = entry.getNote();
-        if (note > max && !entry.isDiscounted()) {
+        if (note > max && !entry.isDiscounted() && entry.isGarbageEligible()) {
           garbageEntry = entry;
           max = note;
         }

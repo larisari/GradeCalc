@@ -299,7 +299,7 @@ public class Controller {
 
 
   private void reset() {
-    if (!vorlesungBox.getChildren().isEmpty()) {
+    if (!vorlesungBox.getChildren().isEmpty() && entries != null) {
       for (int i = 0; i < entries.size(); i++) {
         setTextColor(i, "black");
       }

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="moved calculating to own class">
       <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui_VBox.fxml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -48,6 +46,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/gui" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -56,12 +55,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/gui" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/util" />
       <recent name="$PROJECT_DIR$/src/gui" />
       <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/gui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -112,7 +112,7 @@
       <workItem from="1571234202139" duration="16392000" />
       <workItem from="1571695182293" duration="38087000" />
       <workItem from="1572106718911" duration="5692000" />
-      <workItem from="1572785407457" duration="6566000" />
+      <workItem from="1572785407457" duration="16556000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -268,7 +268,35 @@
       <option name="project" value="LOCAL" />
       <updated>1572792042963</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="checkboxes appear next to lectures upon clicking &quot;mülltonnenregelung&quot;">
+      <created>1572796817569</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1572796817569</updated>
+    </task>
+    <task id="LOCAL-00024" summary="adding and removing checkboxes in various methods now seem to work">
+      <created>1572804067675</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1572804067675</updated>
+    </task>
+    <task id="LOCAL-00025" summary="moved calculating to own class">
+      <created>1572806309040</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1572806309040</updated>
+    </task>
+    <task id="LOCAL-00026" summary="moved calculating to own class">
+      <created>1572806330420</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1572806330420</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,6 +338,9 @@
     <MESSAGE value="add new row inbetween works&#10;added shortcuts" />
     <MESSAGE value="added info button for garbage rule" />
     <MESSAGE value="added info button for garbage rule, works" />
-    <option name="LAST_COMMIT_MESSAGE" value="added info button for garbage rule, works" />
+    <MESSAGE value="checkboxes appear next to lectures upon clicking &quot;mülltonnenregelung&quot;" />
+    <MESSAGE value="adding and removing checkboxes in various methods now seem to work" />
+    <MESSAGE value="moved calculating to own class" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved calculating to own class" />
   </component>
 </project>
