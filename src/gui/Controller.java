@@ -46,6 +46,8 @@ public class Controller {
   private Label promptEntry;
   @FXML
   private Label factorDisplay;
+  @FXML
+  private CheckBox selectAll;
   private double garbageFactor = 0;
   private List<Entry> entries;
   private VBox garbageCheck;
@@ -528,6 +530,7 @@ public class Controller {
         garbageCheck.getChildren().add(box);
       }
       hBox.getChildren().add(0, garbageCheck);
+      selectAll.setVisible(true);
       //}
     }
   }
@@ -535,6 +538,7 @@ public class Controller {
   private void removeCheckboxes() {
     if (hBox.getChildren().size() > 3) {
       hBox.getChildren().remove(garbageCheck);
+      selectAll.setVisible(false);
     }
   }
 
@@ -576,5 +580,24 @@ public class Controller {
     garbageFactor = 0;
     removeCheckboxes();
     factorDisplay.setText("");
+  }
+
+  @FXML
+  private void handleSelectAll(MouseEvent mouseEvent) {
+    selectAll();
+  }
+
+  private void selectAll() {
+    if (selectAll.isSelected()) {
+      for (int i = 0; i < garbageCheck.getChildren().size(); i++) {
+        CheckBox check = (CheckBox) garbageCheck.getChildren().get(i);
+        check.setSelected(true);
+      }
+    } else {
+      for (int i = 0; i < garbageCheck.getChildren().size(); i++) {
+        CheckBox check = (CheckBox) garbageCheck.getChildren().get(i);
+        check.setSelected(false);
+      }
+    }
   }
 }
