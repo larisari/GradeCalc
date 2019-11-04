@@ -1,0 +1,188 @@
+<list>
+  <util.Entry>
+    <name>Einführung in die Programmierung</name>
+    <note>1.0</note>
+    <ects>9</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Analysis</name>
+    <note>3.3</note>
+    <ects>9</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Digitale Medien</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Programmierung und Modellierung</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Algorithmen und Datenstrukturen</name>
+    <note>2.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Rechnerarchitektur</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Medientechnik</name>
+    <note>0.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Betriebssysteme</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>SEP oder SysPrak</name>
+    <note>1.3</note>
+    <ects>12</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Lineare Algebra für Informatiker</name>
+    <note>2.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Computergrafik</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Rechnernetze und verteilte Systeme</name>
+    <note>1.3</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Theoretische Informatik f. Medienifi</name>
+    <note>1.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Seminar zu ausgewählten Themen</name>
+    <note>1.3</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Soziale und persönliche Kompetenz</name>
+    <note>0.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Softwaretechnik</name>
+    <note>1.3</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Datenbanksysteme</name>
+    <note>1.3</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Vertiefende Themen I</name>
+    <note>1.7</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Vertiefende Themen II</name>
+    <note>1.7</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Ethik und Recht in der Informatik</name>
+    <note>0.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Projektkompetenz Multimedia</name>
+    <note>0.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Vertiefende Themen III</name>
+    <note>1.7</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Bachelorarbeit</name>
+    <note>2.0</note>
+    <ects>12</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Disputation</name>
+    <note>2.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Grundbegriffe der Psychologie</name>
+    <note>1.7</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Teilnahme an 3 Nutzerstudien</name>
+    <note>0.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>UX2</name>
+    <note>1.3</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Statistik für Medieninformatik</name>
+    <note>2.3</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>UX1</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>UX3 (Concept Development)</name>
+    <note>0.0</note>
+    <ects>6</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>Zeichnen und Skizzieren</name>
+    <note>0.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+</list>

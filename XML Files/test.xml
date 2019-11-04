@@ -1,0 +1,32 @@
+<list>
+  <util.Entry>
+    <name>asdf</name>
+    <note>3.0</note>
+    <ects>2</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>asdf</name>
+    <note>3.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>asdgas</name>
+    <note>3.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>asdgas</name>
+    <note>1.0</note>
+    <ects>2</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>sjhsfgs</name>
+    <note>1.0</note>
+    <ects>3</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+</list>

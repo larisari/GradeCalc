@@ -1,0 +1,30 @@
+<list>
+  <util.Entry>
+    <name>eip</name>
+    <note>1.7</note>
+    <ects>9</ects>
+    <garbEligible>true</garbEligible>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>analysis</name>
+    <note>4.0</note>
+    <ects>9</ects>
+    <garbEligible>false</garbEligible>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>dm</name>
+    <note>1.0</note>
+    <ects>6</ects>
+    <garbEligible>true</garbEligible>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>medientechnik</name>
+    <note>0.0</note>
+    <ects>6</ects>
+    <garbEligible>true</garbEligible>
+    <discounted>false</discounted>
+  </util.Entry>
+</list>

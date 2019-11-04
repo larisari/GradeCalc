@@ -1,0 +1,14 @@
+<list>
+  <util.Entry>
+    <name>y&lt;xy&lt;x</name>
+    <note>1.0</note>
+    <ects>2</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+  <util.Entry>
+    <name>ASDA</name>
+    <note>2.0</note>
+    <ects>2</ects>
+    <discounted>false</discounted>
+  </util.Entry>
+</list>
