@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -40,11 +41,11 @@ public class Controller {
   @FXML
   private VBox noteBox;
   @FXML
-  private CheckBox checkbox;
-  @FXML
   private Label finalGrade;
   @FXML
   private Label promptEntry;
+  @FXML
+  private Label factorDisplay;
   private double garbageFactor = 0;
   private List<Entry> entries;
   private VBox garbageCheck;
@@ -75,7 +76,7 @@ public class Controller {
     setTraversalOrder(txt1, vBoxLength);
     setTraversalOrder(txt2, vBoxLength);
     setTraversalOrder(txt3, vBoxLength);
-    if (checkbox.isSelected()) {
+    if (garbageFactor > 0) {
       CheckBox box = new CheckBox();
       box.getStyleClass().add("checkBox");
       garbageCheck.getChildren().add(box);
@@ -119,7 +120,7 @@ public class Controller {
       vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
       ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
       noteBox.getChildren().remove(noteBox.getChildren().size() - 1);
-      if (checkbox.isSelected()) {
+      if (garbageFactor > 0) {
         garbageCheck.getChildren().remove(garbageCheck.getChildren().size() - 1);
       }
     } else {
@@ -141,7 +142,7 @@ public class Controller {
         vorlesungBox.getChildren().remove(index);
         ectsBox.getChildren().remove(index);
         noteBox.getChildren().remove(index);
-        if (checkbox.isSelected()) {
+        if (garbageFactor > 0) {
           garbageCheck.getChildren().remove(index);
         }
         box.getChildren().get(index).requestFocus();
@@ -184,7 +185,7 @@ public class Controller {
         ectsBox.getChildren().add(i + 1, txt2);
         noteBox.getChildren().add(i + 1, txt3);
 
-        if (checkbox.isSelected()) {
+        if (garbageFactor > 0) {
           CheckBox box = new CheckBox();
           box.getStyleClass().add("checkBox");
           garbageCheck.getChildren().add(i + 1, box);
@@ -214,7 +215,7 @@ public class Controller {
 
     calculator = new Calculator(entries);
     double grade = calculator.calculate(garbageFactor);
-    if (garbageFactor > 0){
+    if (garbageFactor > 0) {
       highlightCountedGrades();
     }
 
@@ -383,8 +384,14 @@ public class Controller {
     while (vorlesungBox.getChildren().size() < uEntries.size()) {
       addRow();
     }
-    setCheckBoxesVisible();
-    int counter = 0;
+    //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
+    for (Entry entry : uEntries) {
+      if (entry.isGarbageEligible()) {
+        setCheckBoxesVisible();
+        break;
+      }
+    }
+
     for (int i = 0; i < uEntries.size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
@@ -395,12 +402,8 @@ public class Controller {
       if (uEntries.get(i).isGarbageEligible()) {
         CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
         box.setSelected(true);
-        counter++;
-        checkbox.setSelected(true);
+
       }
-    }
-    if (counter == 0) {
-      removeCheckboxes();
     }
 
   }
@@ -423,7 +426,7 @@ public class Controller {
 
         Entry entry = new Entry(vorTxt.getText(), note, Integer.parseInt(ectsTxt.getText()));
 
-        if (checkbox.isSelected()) {
+        if (garbageFactor > 0) {
           CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
           if (box.isSelected()) {
             entry.setGarbEligible();
@@ -452,13 +455,9 @@ public class Controller {
       ectsTxt.clear();
       noteTxt.clear();
       removeCheckboxes();
-      /*if (checkbox.isSelected()) {
-        CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
-        box.setSelected(false);
-      }*/
     }
     finalGrade.setText("");
-    checkbox.setSelected(false);
+    factorDisplay.setText("");
   }
 
   //TODO for Testing only
@@ -505,10 +504,10 @@ public class Controller {
       e.printStackTrace();
     }
   }
-
+/*
   @FXML
   private void enableGarbageBoxes(MouseEvent mouseEvent) {
-    if (checkbox.isSelected()) {
+    if (garbageFactor > 0) {
       setCheckBoxesVisible();
     } else {
       removeCheckboxes();
@@ -516,17 +515,21 @@ public class Controller {
     }
   }
 
+ */
+
   private void setCheckBoxesVisible() {
     //  if (garbageCheck == null || garbageCheck.getChildren()
     //    .isEmpty()) {     //könnte exception schmeißen, geht bei UPLOAD nicht hier rein weil garbageCheck nicht leer.
-    garbageCheck = new VBox();
-    while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
-      CheckBox box = new CheckBox();
-      box.getStyleClass().add("checkBox");
-      garbageCheck.getChildren().add(box);
+    if (hBox.getChildren().size() < 4) {
+      garbageCheck = new VBox();
+      while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
+        CheckBox box = new CheckBox();
+        box.getStyleClass().add("checkBox");
+        garbageCheck.getChildren().add(box);
+      }
+      hBox.getChildren().add(0, garbageCheck);
+      //}
     }
-    hBox.getChildren().add(0, garbageCheck);
-    //}
   }
 
   private void removeCheckboxes() {
@@ -537,27 +540,41 @@ public class Controller {
 
   @FXML
   private void setFactorMI(ActionEvent actionEvent) {
-    setGarbageFactor(0.166666667);
+    /*MenuItem mItem = (MenuItem) actionEvent.getSource();
+    String text = mItem.getText();
+    garbageMenu.setText(text);
+    */
+    garbageFactor = 0.166666667;
+    setCheckBoxesVisible();
+    factorDisplay.setText("Faktor: 1/6");
+
   }
 
   @FXML
   private void setFactorInfo(ActionEvent actionEvent) {
-    setGarbageFactor(0.166666667);
+    garbageFactor = 0.166666667;
+    setCheckBoxesVisible();
+    factorDisplay.setText("Faktor: 1/6");
   }
 
   @FXML
   private void setFactorInfo150(ActionEvent actionEvent) {
-    setGarbageFactor(0.2);
+    garbageFactor = 0.2;
+    setCheckBoxesVisible();
+    factorDisplay.setText("Faktor: 1/5");
   }
 
   @FXML
   private void setFactorInfo120(ActionEvent actionEvent) {
-    setGarbageFactor(0.15);
+    garbageFactor = 0.15;
+    setCheckBoxesVisible();
+    factorDisplay.setText("Faktor: 0.15");
 
   }
 
-  private void setGarbageFactor(double factor) {
-    garbageFactor = factor;
-    checkbox.setSelected(true);
+  public void resetGarbageFactor(ActionEvent actionEvent) {
+    garbageFactor = 0;
+    removeCheckboxes();
+    factorDisplay.setText("");
   }
 }

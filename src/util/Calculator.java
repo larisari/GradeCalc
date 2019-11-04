@@ -54,10 +54,10 @@ public class Calculator {
   private void discountGarbageECTS() {
     double max = 0;
     while (garbageECTS > 0) {
-      for (int i = 0; i < entries.size(); i++) {
-        Double note = entries.get(i).getNote();
-        if (note > max && !entries.get(i).isDiscounted()) {
-          garbageEntry = entries.get(i);
+      for (Entry entry : entries) {
+        Double note = entry.getNote();
+        if (note > max && !entry.isDiscounted()) {
+          garbageEntry = entry;
           max = note;
         }
       }
