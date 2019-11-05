@@ -52,6 +52,9 @@ public class Controller {
   private List<Entry> entries;
   private VBox garbageCheck;
   private Calculator calculator;
+  private double infoMMIFactor = 0.166666667;
+  private double info150Factor = 0.2;
+  private double info120Factor = 0.15;
 
 //TODO checkboxen anpassen für delete zeile oder add zeile
 
@@ -100,7 +103,7 @@ public class Controller {
         VBox lastVBox = (VBox) hBox.getChildren().get(hBox.getChildren().size() - 1);
         int lastIndex = lastVBox.getChildren().size() - 1;
         if (lastVBox.equals(txt.getParent())) {
-          if(!lastVBox.getChildren().get(lastIndex).equals(txt)) {
+          if (!lastVBox.getChildren().get(lastIndex).equals(txt)) {
             VBox vBox;
             if (hBox.getChildren().size() > 3) {
               vBox = (VBox) hBox.getChildren().get(1);
@@ -484,22 +487,26 @@ public class Controller {
 
   @FXML
   private void handleInfoComp(ActionEvent actionEvent) {
-    uploadFile("InformatikComputerlinguistik.xml");
+    uploadFile("InfoPlusComp.xml");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
   }
 
   @FXML
   private void handleMMI(ActionEvent actionEvent) {
-    uploadFile("MedieninformatikMMI.xml");
+    uploadFile("MMI.xml");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
   }
 
   @FXML
   private void handleMG(ActionEvent actionEvent) {
-    uploadFile("MedieninformatikMG.xml");
+    uploadFile("MedienGest.xml");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
   }
 
   @FXML
   private void handleMBWL(ActionEvent actionEvent) {
-    uploadFile("MedieninformatikBWL.xml");
+    uploadFile("MedienBWL.xml");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
   }
 
   private void uploadFile(String filename) {
@@ -559,38 +566,38 @@ public class Controller {
     String text = mItem.getText();
     garbageMenu.setText(text);
     */
-    garbageFactor = 0.166666667;
-    setCheckBoxesVisible();
-    factorDisplay.setText("Faktor: 1/6");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
 
   }
 
   @FXML
   private void setFactorInfo(ActionEvent actionEvent) {
-    garbageFactor = 0.166666667;
-    setCheckBoxesVisible();
-    factorDisplay.setText("Faktor: 1/6");
+    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
   }
 
   @FXML
   private void setFactorInfo150(ActionEvent actionEvent) {
-    garbageFactor = 0.2;
-    setCheckBoxesVisible();
-    factorDisplay.setText("Faktor: 1/5");
+    setGarbageFactor(info150Factor, "Faktor: 1/5", true);
   }
 
   @FXML
   private void setFactorInfo120(ActionEvent actionEvent) {
-    garbageFactor = 0.15;
-    setCheckBoxesVisible();
-    factorDisplay.setText("Faktor: 0.15");
-
+    setGarbageFactor(info120Factor, "Faktor: 0.15", true);
   }
 
-  public void resetGarbageFactor(ActionEvent actionEvent) {
-    garbageFactor = 0;
-    removeCheckboxes();
-    factorDisplay.setText("");
+  @FXML
+  private void resetGarbageFactor(ActionEvent actionEvent) {
+    setGarbageFactor(0, "", false);
+  }
+
+  private void setGarbageFactor(double gFactor, String factor, boolean setBoxes) {
+    garbageFactor = gFactor;
+    factorDisplay.setText(factor);
+    if (setBoxes) {
+      setCheckBoxesVisible();
+    } else {
+      removeCheckboxes();
+    }
   }
 
   @FXML
