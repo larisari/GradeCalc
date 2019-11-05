@@ -88,13 +88,25 @@ public class Controller {
 
   //TODO anpassen für wenn checkboxen aktiv sind
 
+  /**
+   * Changes traversal order for every Textfield to horizontal.
+   *
+   * @param txt - TextField for which traversal order should be changed
+   * @param vBoxLength - vertical index of TextField
+   */
   private void setTraversalOrder(TextField txt, int vBoxLength) {
     txt.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
       if (keyEvent.getCode() == KeyCode.TAB) {
         VBox lastVBox = (VBox) hBox.getChildren().get(hBox.getChildren().size() - 1);
+        int lastIndex = lastVBox.getChildren().size() - 1;
         if (lastVBox.equals(txt.getParent())) {
-          if (!lastVBox.getChildren().get(lastVBox.getChildren().size() - 1).equals(txt)) {
-            VBox vBox = (VBox) hBox.getChildren().get(0);
+          if(!lastVBox.getChildren().get(lastIndex).equals(txt)) {
+            VBox vBox;
+            if (hBox.getChildren().size() > 3) {
+              vBox = (VBox) hBox.getChildren().get(1);
+            } else {
+              vBox = (VBox) hBox.getChildren().get(0);
+            }
             keyEvent.consume();
             vBox.getChildren().get(vBoxLength + 1).requestFocus();
           }
@@ -202,7 +214,6 @@ public class Controller {
     }
   }
 
-  //TODO anpassen für checkboxen
 
   /**
    * Handles user pressing calculate grade Button. Calculates regular average or grades with garbage
