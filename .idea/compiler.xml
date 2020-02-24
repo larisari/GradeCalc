@@ -9,9 +9,8 @@
         <module name="NoteBerechnen" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="gradecalculator" target="1.5" />
-      <module name="NoteBerechnen" target="1.5" />
+    <bytecodeTargetLevel target="11">
+      <module name="NoteBerechnen" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

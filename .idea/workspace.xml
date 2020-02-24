@@ -2,27 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/Gui_HVBox.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/Calculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/Entry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/boxStyler.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_11.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Start.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Gui_HVBox.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Calculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Entry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/boxStyler.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NoteBerechnen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NoteBerechnen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/libraries/javafx_sdk_11_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/NoteBerechnen.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/Start.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/InformatikComputerlinguistik.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/Louisa_SHIT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/MedieninformatikBWL.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/MedieninformatikMG.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/MedieninformatikMMI.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/SDA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/Vorlesungen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/aktuell.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/alleVorlesungen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/test1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/XML Files/test2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/gui/Gui_HVBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/gui/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/src/util/boxStyler.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/boxStyler.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/util/Calculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/util/Entry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/NoteBerechnen/util/boxStyler.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Gui_HVBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/boxStyler.css" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,17 +87,26 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Louisa" />
         <option value="LarigehtaufSafari &lt;sarita@sridharan.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="usePluginRegistry" value="true" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
   </component>
   <component name="ProjectId" id="1RrpomVRo4hXcokoQN42mjYbDu3" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -82,20 +118,21 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/gui" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/util" />
       <recent name="$PROJECT_DIR$/src/gui" />
       <recent name="$PROJECT_DIR$/src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/gui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -156,7 +193,7 @@
       <workItem from="1582043060254" duration="152000" />
       <workItem from="1582043249000" duration="397000" />
       <workItem from="1582310316008" duration="550000" />
-      <workItem from="1582544049745" duration="4243000" />
+      <workItem from="1582544049745" duration="16388000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -389,7 +426,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572949435709</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="added maven">
+      <created>1582550038407</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1582550038407</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,8 +453,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Daten werden in xml file lokal gespeichert" />
-    <MESSAGE value="upload funktioniert noch nicht aber richtige klasse schon mal gefunden" />
     <MESSAGE value="upload öffnet finder fenster in richtigem directory" />
     <MESSAGE value="upload funktioniert aber fenster freezed manchmal" />
     <MESSAGE value="fenster freeze gefixed" />
@@ -434,21 +476,9 @@
     <MESSAGE value="added select all box for checkboxes" />
     <MESSAGE value="traversal order fixed" />
     <MESSAGE value="added factor for pre written courses" />
-    <option name="LAST_COMMIT_MESSAGE" value="added factor for pre written courses" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/gui/Controller.java</url>
-          <line>314</line>
-          <properties class="gui.Controller" method="reset">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added maven" />
+    <MESSAGE value="Fix JSON file support" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix JSON file support" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

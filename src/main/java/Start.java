@@ -17,10 +17,10 @@ public class Start extends Application {
   public void start(Stage primaryStage) {
     try {
       FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("gui/Gui_HVBox.fxml"));
+      loader.setLocation(getClass().getResource("Gui_HVBox.fxml"));
       Parent root = loader.load();
       Scene scene = new Scene(root);
-      scene.getStylesheets().add("util/boxStyler.css");
+      scene.getStylesheets().add("boxStyler.css");
       primaryStage.setTitle("GradeCalculator");
       primaryStage.setScene(scene);
       primaryStage.show();

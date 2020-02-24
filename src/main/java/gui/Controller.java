@@ -1,12 +1,14 @@
 package gui;
 
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -315,7 +317,7 @@ public class Controller {
   private void reset() {
     if (!vorlesungBox.getChildren().isEmpty() && entries != null) {
       for (int i = 0; i < entries.size(); i++) {
-          setTextColor(i, "black");
+        setTextColor(i, "black");
       }
     }
     entries = null;
@@ -329,19 +331,56 @@ public class Controller {
   @FXML
   private void handleDownloadXML(ActionEvent mouseEvent) {
     saveEntries();
-    XStream xStream = new XStream(new DomDriver());
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Speichere deine Datei ab.");
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showSaveDialog(stage);
     if (selectedFile != null) {
       String counter = checkForDuplicate(selectedFile);
-      try {
-        xStream.toXML(entries, new FileOutputStream(selectedFile + counter + ".xml"));
-      } catch (FileNotFoundException e) {
+      Gson gson = new Gson();
+      try (FileWriter fileWriter = new FileWriter(selectedFile + counter
+          + ".json")){
+        gson.toJson(entries, fileWriter);
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }
+
+    /**
+     JSONArray arr = new JSONArray();
+     for (int i = 0; i < entries.size(); i++) {
+     JSONObject json = entries.get(i).toJson();
+     arr.put(json);
+     }
+     JSONObject obj = new JSONObject();
+     obj.put("entries", arr);
+     try (FileWriter fileWriter = new FileWriter(
+     selectedFile + counter
+     + ".json")) {
+     fileWriter.write(obj.toString());
+     } catch (IOException e) {
+     e.printStackTrace();
+     }
+
+     }
+     **/
+    /**
+     saveEntries();
+     XStream xStream = new XStream(new DomDriver());
+     FileChooser chooser = new FileChooser();
+     chooser.setTitle("Speichere deine Datei ab.");
+     Stage stage = (Stage) window.getScene().getWindow();
+     File selectedFile = chooser.showSaveDialog(stage);
+     if (selectedFile != null) {
+     String counter = checkForDuplicate(selectedFile);
+     try {
+     xStream.toXML(entries, new FileOutputStream(selectedFile + counter + ".xml"));
+     } catch (FileNotFoundException e) {
+     e.printStackTrace();
+
+     }
+     }
+     **/
   }
 
   private String checkForDuplicate(File file) {
@@ -365,12 +404,12 @@ public class Controller {
    * Handles user pressing Upload. Uploads saved xml file.
    */
   @FXML
-  private void handleUploadXML(ActionEvent mouseEvent) {
+  private void handleUploadJson(ActionEvent mouseEvent) {
     reset();
     FileChooser chooser = new FileChooser();
-    chooser.setInitialDirectory(new File("XML Files"));
+    chooser.setInitialDirectory(new File("JSONs"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
-    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
+    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSONs", "*.json"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
@@ -380,7 +419,6 @@ public class Controller {
     }
   }
 
-
   /**
    * Converts uploaded data into list. Inserts data of uploaded xml file into Textfields.
    *
@@ -388,38 +426,77 @@ public class Controller {
    */
   private void insertEntries(File file) {
     promptEntry.setVisible(false);
-    XStream xStream = new XStream(new DomDriver());
-    //TODO ev eigene Exception schreiben wenn xml file hochgeladen wird das falsches Format hat
-    List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
-
+    Gson gson = new Gson();
+    List<Entry> uEntries = null;
+    try (FileReader fileReader = new FileReader("JSONs/" + file.getName())) {
+      Type entryListType = new TypeToken<ArrayList<Entry>>() {}.getType();
+      uEntries = gson.fromJson(fileReader, entryListType);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     if (!vorlesungBox.getChildren().isEmpty()) {
       clear();
     }
-    while (vorlesungBox.getChildren().size() < uEntries.size()) {
-      addRow();
-    }
-    //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
-    for (Entry entry : uEntries) {
-      if (entry.isGarbageEligible()) {
-        setCheckBoxesVisible();
-        break;
+    if(uEntries != null) {
+      while (vorlesungBox.getChildren().size() < uEntries.size()) {
+        addRow();
+      }
+      //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
+      for (Entry entry : uEntries) {
+        if (entry.isGarbageEligible()) {
+          setCheckBoxesVisible();
+          break;
+        }
+      }
+
+      for (int i = 0; i < uEntries.size(); i++) {
+        TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+        TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+        TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+        vorTxt.setText(uEntries.get(i).getName());
+        ectsTxt.setText(uEntries.get(i).getECTS().toString());
+        noteTxt.setText(uEntries.get(i).getNote() + "");
+        if (uEntries.get(i).isGarbageEligible()) {
+          CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
+          box.setSelected(true);
+
+        }
       }
     }
 
-    for (int i = 0; i < uEntries.size(); i++) {
-      TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
-      TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
-      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      vorTxt.setText(uEntries.get(i).getName());
-      ectsTxt.setText(uEntries.get(i).getECTS().toString());
-      noteTxt.setText(uEntries.get(i).getNote() + "");
-      if (uEntries.get(i).isGarbageEligible()) {
-        CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
-        box.setSelected(true);
+    /**
+     XStream xStream = new XStream(new DomDriver());
+     //TODO ev eigene Exception schreiben wenn xml file hochgeladen wird das falsches Format hat
+     List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
 
-      }
-    }
+     if (!vorlesungBox.getChildren().isEmpty()) {
+     clear();
+     }
+     while (vorlesungBox.getChildren().size() < uEntries.size()) {
+     addRow();
+     }
+     //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
+     for (Entry entry : uEntries) {
+     if (entry.isGarbageEligible()) {
+     setCheckBoxesVisible();
+     break;
+     }
+     }
 
+     for (int i = 0; i < uEntries.size(); i++) {
+     TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
+     TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
+     TextField noteTxt = (TextField) noteBox.getChildren().get(i);
+     vorTxt.setText(uEntries.get(i).getName());
+     ectsTxt.setText(uEntries.get(i).getECTS().toString());
+     noteTxt.setText(uEntries.get(i).getNote() + "");
+     if (uEntries.get(i).isGarbageEligible()) {
+     CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
+     box.setSelected(true);
+
+     }
+     }
+     **/
   }
 
   /**
@@ -431,7 +508,8 @@ public class Controller {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText().isEmpty())
+      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText()
+          .isEmpty())
           && isECTS(ectsTxt.getText())) {
         double note = 0;
         if (!noteTxt.getText().isEmpty()) {
@@ -473,7 +551,6 @@ public class Controller {
     finalGrade.setText("");
     factorDisplay.setText("");
   }
-
 
   @FXML
   private void handleInfoComp(ActionEvent actionEvent) {
