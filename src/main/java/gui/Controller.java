@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -51,12 +50,10 @@ public class Controller {
   private double garbageFactor = 0;
   private List<Entry> entries;
   private VBox garbageCheck;
-  private Calculator calculator;
   private double infoMMIFactor = 0.166666667;
   private double info150Factor = 0.2;
   private double info120Factor = 0.15;
 
-//TODO checkboxen anpassen für delete zeile oder add zeile
 
   /**
    * Handles user pressing the "+"-Button to add a new Row of Textfields.
@@ -88,8 +85,6 @@ public class Controller {
     }
 
   }
-
-  //TODO anpassen für wenn checkboxen aktiv sind
 
   /**
    * Changes traversal order for every Textfield to horizontal.
@@ -229,14 +224,14 @@ public class Controller {
       setTextColor(i, "black");
     }
 
-    calculator = new Calculator(entries);
+    Calculator calculator = new Calculator(entries);
     double grade = calculator.calculate(garbageFactor);
     if (garbageFactor > 0) {
       highlightCountedGrades();
     }
 
     finalGrade.setText("" + grade);
-    reset();
+    entries = null;
     deleteSuperfluousFields();
 
   }
@@ -256,14 +251,15 @@ public class Controller {
     }
   }
 
+  //TODO discount wird nicht mehr gesetztw
 
   private void highlightCountedGrades() {
     for (int i = 0; i < entries.size(); i++) {
       if (entries.get(i).isDiscounted()) {
         setTextColor(i, "#9c9c9c");
-      } else {
+      } /*else {
         setTextColor(i, "black");
-      }
+      }*/
     }
   }
 
@@ -291,6 +287,7 @@ public class Controller {
         return true;
       }
     } catch (NumberFormatException e) {
+      e.printStackTrace();
     }
     return false;
   }
@@ -303,11 +300,12 @@ public class Controller {
    */
   private boolean isNote(String number) {
     try {
-      double validNumber = Double.valueOf(number);
+      double validNumber = Double.parseDouble(number);
       if (validNumber >= 0) {
         return true;
       }
     } catch (NumberFormatException e) {
+      e.printStackTrace();
 
     }
     return false;
@@ -317,7 +315,7 @@ public class Controller {
   private void reset() {
     if (!vorlesungBox.getChildren().isEmpty() && entries != null) {
       for (int i = 0; i < entries.size(); i++) {
-        setTextColor(i, "black");
+          setTextColor(i, "black");
       }
     }
     entries = null;
@@ -382,7 +380,6 @@ public class Controller {
     }
   }
 
-  //TODO anpassen für checkboxen, muss iwie erkennen wenn mülltonnenwerte mitabgespeichert wurden
 
   /**
    * Converts uploaded data into list. Inserts data of uploaded xml file into Textfields.
@@ -392,6 +389,7 @@ public class Controller {
   private void insertEntries(File file) {
     promptEntry.setVisible(false);
     XStream xStream = new XStream(new DomDriver());
+    //TODO ev eigene Exception schreiben wenn xml file hochgeladen wird das falsches Format hat
     List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
 
     if (!vorlesungBox.getChildren().isEmpty()) {
@@ -476,14 +474,6 @@ public class Controller {
     factorDisplay.setText("");
   }
 
-  //TODO for Testing only
-  @FXML
-  private void clearNote() {
-    for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
-      TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      noteTxt.clear();
-    }
-  }
 
   @FXML
   private void handleInfoComp(ActionEvent actionEvent) {
@@ -599,6 +589,10 @@ public class Controller {
       removeCheckboxes();
     }
   }
+
+  //TODO mit Pfeilen durch Felder navigieren
+  //TODO schmeißt Exception wenn bei Note leer ist? -> Testen
+  //TODO garbagefactor mit abspeichern
 
   @FXML
   private void handleSelectAll(MouseEvent mouseEvent) {
