@@ -20,8 +20,8 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem accelerator="Shortcut+U" mnemonicParsing="false" onAction="#handleUploadJson" text="Upload" />
-                  <MenuItem accelerator="Shortcut+S" mnemonicParsing="false" onAction="#handleDownloadXML" text="Save as..." />
+                  <MenuItem accelerator="Shortcut+U" mnemonicParsing="false" onAction="#handleLoadFile" text="Upload" />
+                  <MenuItem accelerator="Shortcut+S" mnemonicParsing="false" onAction="#handleSaveFile" text="Save as..." />
                </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Bearbeiten">

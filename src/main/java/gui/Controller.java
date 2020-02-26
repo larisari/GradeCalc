@@ -2,6 +2,10 @@ package gui;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
 import java.awt.Desktop;
 import java.io.File;
@@ -81,9 +85,10 @@ public class Controller {
     setTraversalOrder(txt2, vBoxLength);
     setTraversalOrder(txt3, vBoxLength);
     if (garbageFactor > 0) {
-      CheckBox box = new CheckBox();
+      setGarbageFactor(garbageFactor, true);
+/*      CheckBox box = new CheckBox();
       box.getStyleClass().add("checkBox");
-      garbageCheck.getChildren().add(box);
+      garbageCheck.getChildren().add(box);*/
     }
 
   }
@@ -326,11 +331,12 @@ public class Controller {
 
 
   /**
-   * Handles user pressing "Save as". Saves user input as xml file to local directory.
+   * Handles user pressing "Save as". Saves user input as json file to local directory.
    */
   @FXML
-  private void handleDownloadXML(ActionEvent mouseEvent) {
+  private void handleSaveFile(ActionEvent mouseEvent) {
     saveEntries();
+
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Speichere deine Datei ab.");
     Stage stage = (Stage) window.getScene().getWindow();
@@ -339,48 +345,17 @@ public class Controller {
       String counter = checkForDuplicate(selectedFile);
       Gson gson = new Gson();
       try (FileWriter fileWriter = new FileWriter(selectedFile + counter
-          + ".json")){
-        gson.toJson(entries, fileWriter);
+          + ".json")) {
+        JsonObject obj = new JsonObject();
+        JsonArray arr = new Gson().toJsonTree(entries).getAsJsonArray();
+        JsonPrimitive prim = new JsonPrimitive(garbageFactor);
+        obj.add("entries", arr);
+        obj.add("factor", prim);
+        gson.toJson(obj, fileWriter);
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
-
-    /**
-     JSONArray arr = new JSONArray();
-     for (int i = 0; i < entries.size(); i++) {
-     JSONObject json = entries.get(i).toJson();
-     arr.put(json);
-     }
-     JSONObject obj = new JSONObject();
-     obj.put("entries", arr);
-     try (FileWriter fileWriter = new FileWriter(
-     selectedFile + counter
-     + ".json")) {
-     fileWriter.write(obj.toString());
-     } catch (IOException e) {
-     e.printStackTrace();
-     }
-
-     }
-     **/
-    /**
-     saveEntries();
-     XStream xStream = new XStream(new DomDriver());
-     FileChooser chooser = new FileChooser();
-     chooser.setTitle("Speichere deine Datei ab.");
-     Stage stage = (Stage) window.getScene().getWindow();
-     File selectedFile = chooser.showSaveDialog(stage);
-     if (selectedFile != null) {
-     String counter = checkForDuplicate(selectedFile);
-     try {
-     xStream.toXML(entries, new FileOutputStream(selectedFile + counter + ".xml"));
-     } catch (FileNotFoundException e) {
-     e.printStackTrace();
-
-     }
-     }
-     **/
   }
 
   private String checkForDuplicate(File file) {
@@ -401,10 +376,10 @@ public class Controller {
   }
 
   /**
-   * Handles user pressing Upload. Uploads saved xml file.
+   * Handles user pressing Upload. Uploads saved json file.
    */
   @FXML
-  private void handleUploadJson(ActionEvent mouseEvent) {
+  private void handleLoadFile(ActionEvent mouseEvent) {
     reset();
     FileChooser chooser = new FileChooser();
     chooser.setInitialDirectory(new File("JSONs"));
@@ -429,15 +404,19 @@ public class Controller {
     Gson gson = new Gson();
     List<Entry> uEntries = null;
     try (FileReader fileReader = new FileReader("JSONs/" + file.getName())) {
-      Type entryListType = new TypeToken<ArrayList<Entry>>() {}.getType();
-      uEntries = gson.fromJson(fileReader, entryListType);
+      JsonObject obj = gson.fromJson(fileReader, JsonObject.class);
+      JsonElement ele = obj.get("factor");
+      garbageFactor = ele.getAsDouble();
+      Type entryListType = new TypeToken<ArrayList<Entry>>() {
+      }.getType();
+      uEntries = gson.fromJson(obj.get("entries"), entryListType);
     } catch (IOException e) {
       e.printStackTrace();
     }
     if (!vorlesungBox.getChildren().isEmpty()) {
       clear();
     }
-    if(uEntries != null) {
+    if (uEntries != null) {
       while (vorlesungBox.getChildren().size() < uEntries.size()) {
         addRow();
       }
@@ -555,25 +534,25 @@ public class Controller {
   @FXML
   private void handleInfoComp(ActionEvent actionEvent) {
     uploadFile("InfoPlusComp.xml");
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
   }
 
   @FXML
   private void handleMMI(ActionEvent actionEvent) {
     uploadFile("MMI.xml");
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
   }
 
   @FXML
   private void handleMG(ActionEvent actionEvent) {
     uploadFile("MedienGest.xml");
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
   }
 
   @FXML
   private void handleMBWL(ActionEvent actionEvent) {
     uploadFile("MedienBWL.xml");
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
   }
 
   private void uploadFile(String filename) {
@@ -603,13 +582,13 @@ public class Controller {
   }
 
  */
-
+//TODO problem mit überflüssigen checkboxen wenn abgehakt abgespeichert
   private void setCheckBoxesVisible() {
     //  if (garbageCheck == null || garbageCheck.getChildren()
     //    .isEmpty()) {     //könnte exception schmeißen, geht bei UPLOAD nicht hier rein weil garbageCheck nicht leer.
     if (hBox.getChildren().size() < 4) {
       garbageCheck = new VBox();
-      while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
+      while (garbageCheck.getChildren().size() <= vorlesungBox.getChildren().size()) {
         CheckBox box = new CheckBox();
         box.getStyleClass().add("checkBox");
         garbageCheck.getChildren().add(box);
@@ -633,33 +612,41 @@ public class Controller {
     String text = mItem.getText();
     garbageMenu.setText(text);
     */
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
 
   }
 
   @FXML
   private void setFactorInfo(ActionEvent actionEvent) {
-    setGarbageFactor(infoMMIFactor, "Faktor: 1/6", true);
+    setGarbageFactor(infoMMIFactor, true);
   }
 
   @FXML
   private void setFactorInfo150(ActionEvent actionEvent) {
-    setGarbageFactor(info150Factor, "Faktor: 1/5", true);
+    setGarbageFactor(info150Factor, true);
   }
 
   @FXML
   private void setFactorInfo120(ActionEvent actionEvent) {
-    setGarbageFactor(info120Factor, "Faktor: 0.15", true);
+    setGarbageFactor(info120Factor, true);
   }
 
   @FXML
   private void resetGarbageFactor(ActionEvent actionEvent) {
-    setGarbageFactor(0, "", false);
+    setGarbageFactor(0, false);
   }
 
-  private void setGarbageFactor(double gFactor, String factor, boolean setBoxes) {
+  private void setGarbageFactor(double gFactor, boolean setBoxes) {
     garbageFactor = gFactor;
-    factorDisplay.setText(factor);
+    if (garbageFactor == infoMMIFactor) {
+      factorDisplay.setText("Faktor: 1/6");
+    } else if (garbageFactor == info150Factor) {
+      factorDisplay.setText("Faktor: 1/5");
+    } else if (garbageFactor == info120Factor) {
+      factorDisplay.setText("Faktor: 0.15");
+    } else {
+      factorDisplay.setText("");
+    }
     if (setBoxes) {
       setCheckBoxesVisible();
     } else {
@@ -670,6 +657,7 @@ public class Controller {
   //TODO mit Pfeilen durch Felder navigieren
   //TODO schmeißt Exception wenn bei Note leer ist? -> Testen
   //TODO garbagefactor mit abspeichern
+  //TODO rename xml methods
 
   @FXML
   private void handleSelectAll(MouseEvent mouseEvent) {
