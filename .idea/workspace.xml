@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -149,6 +149,7 @@
       <workItem from="1582544049745" duration="16712000" />
       <workItem from="1582734911867" duration="44000" />
       <workItem from="1582736560213" duration="5173000" />
+      <workItem from="1582817620401" duration="248000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -402,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582742239806</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="add json folder">
+      <created>1582817672481</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1582817672481</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +430,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upload funktioniert aber fenster freezed manchmal" />
     <MESSAGE value="fenster freeze gefixed" />
     <MESSAGE value="added &quot;save as&quot; function" />
     <MESSAGE value="mülltonne wird jetzt richtig berechnet" />
@@ -447,7 +454,8 @@
     <MESSAGE value="added maven" />
     <MESSAGE value="Fix JSON file support" />
     <MESSAGE value="also save garbagefactor in json" />
-    <option name="LAST_COMMIT_MESSAGE" value="also save garbagefactor in json" />
+    <MESSAGE value="add json folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="add json folder" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

@@ -258,7 +258,7 @@ public class Controller {
     }
   }
 
-  //TODO discount wird nicht mehr gesetztw
+  //TODO discount wird nicht mehr gesetzt
 
   private void highlightCountedGrades() {
     for (int i = 0; i < entries.size(); i++) {
@@ -442,40 +442,6 @@ public class Controller {
         }
       }
     }
-
-    /**
-     XStream xStream = new XStream(new DomDriver());
-     //TODO ev eigene Exception schreiben wenn xml file hochgeladen wird das falsches Format hat
-     List<Entry> uEntries = (List<Entry>) xStream.fromXML(file);
-
-     if (!vorlesungBox.getChildren().isEmpty()) {
-     clear();
-     }
-     while (vorlesungBox.getChildren().size() < uEntries.size()) {
-     addRow();
-     }
-     //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
-     for (Entry entry : uEntries) {
-     if (entry.isGarbageEligible()) {
-     setCheckBoxesVisible();
-     break;
-     }
-     }
-
-     for (int i = 0; i < uEntries.size(); i++) {
-     TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
-     TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
-     TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-     vorTxt.setText(uEntries.get(i).getName());
-     ectsTxt.setText(uEntries.get(i).getECTS().toString());
-     noteTxt.setText(uEntries.get(i).getNote() + "");
-     if (uEntries.get(i).isGarbageEligible()) {
-     CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
-     box.setSelected(true);
-
-     }
-     }
-     **/
   }
 
   /**
@@ -487,8 +453,8 @@ public class Controller {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
       TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
       TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-      if (!vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()) || noteTxt.getText()
-          .isEmpty())
+      if (noteTxt.getText()
+          .isEmpty() || !vorTxt.getText().isEmpty() && (isNote(noteTxt.getText()))
           && isECTS(ectsTxt.getText())) {
         double note = 0;
         if (!noteTxt.getText().isEmpty()) {
@@ -655,9 +621,6 @@ public class Controller {
   }
 
   //TODO mit Pfeilen durch Felder navigieren
-  //TODO schmeißt Exception wenn bei Note leer ist? -> Testen
-  //TODO garbagefactor mit abspeichern
-  //TODO rename xml methods
 
   @FXML
   private void handleSelectAll(MouseEvent mouseEvent) {
