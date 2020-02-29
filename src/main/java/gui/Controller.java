@@ -50,7 +50,7 @@ public class Controller {
   @FXML
   private Label factorDisplay;
   @FXML
-  private CheckBox selectAll;
+  private CheckBox selectAllCBoxes;
   private double garbageFactor = 0;
   private List<Entry> entries;
   private VBox garbageCheck;
@@ -59,9 +59,7 @@ public class Controller {
   private double info120Factor = 0.15;
 
 
-  /**
-   * Handles user pressing the "+"-Button to add a new Row of Textfields.
-   */
+
   @FXML
   public void handleAddNewTxtField() {
     addRow();
@@ -239,6 +237,9 @@ public class Controller {
 
   }
 
+  /**
+   * Deletes empty rows.
+   */
   private void deleteSuperfluousFields() {
     for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField textField = (TextField) vorlesungBox.getChildren().get(i);
@@ -254,6 +255,9 @@ public class Controller {
     }
   }
 
+  /**
+   * Greys out discounted grades.
+   */
   private void highlightCountedGrades() {
     for (int i = 0; i < entries.size(); i++) {
       if (entries.get(i).isDiscounted()) {
@@ -357,6 +361,10 @@ public class Controller {
     }
   }
 
+  /**
+   * Checks if filename already exists.
+   * Adds a counter if it does.
+   */
   private String checkForDuplicate(File file) {
     int counter = 0;
     File temp = new File(file.getPath() + ".json");
@@ -388,20 +396,18 @@ public class Controller {
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
       insertEntries(selectedFile);
-      //  saveEntries();
       deleteSuperfluousFields();
     }
   }
 
   /**
-   * Converts uploaded data into list. Inserts data of uploaded xml file into Textfields.
+   * Converts uploaded data into list. Inserts data of uploaded json file into Textfields.
    *
    * @param file - uploaded data
    */
   private void insertEntries(File file) {
     promptEntry.setVisible(false);
     Gson gson = new Gson();
-    //  List<Entry> uEntries = null;
     try (FileReader fileReader = new FileReader("JSONs/" + file.getName())) {
       JsonObject obj = gson.fromJson(fileReader, JsonObject.class);
       JsonElement ele = obj.get("factor");
@@ -467,14 +473,15 @@ public class Controller {
     }
   }
 
-  /**
-   * Clears all Textfields.
-   */
+
   @FXML
   private void resetGui() {
     clear();
   }
 
+  /**
+   * Clears all gui elements.
+   */
   private void clear() {
     for (int i = 0; i < vorlesungBox.getChildren().size(); i++) {
       TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
@@ -516,7 +523,7 @@ public class Controller {
   }
 
   private void uploadFile(String filename) {
-    File file = new File(("XML Files/" + filename));
+    File file = new File(("JSONs/" + filename));
     insertEntries(file);
     saveEntries();
   }
@@ -531,13 +538,10 @@ public class Controller {
     }
   }
 
-//TODO problem mit überflüssigen checkboxen wenn abgehakt abgespeichert
 
   private void setCheckBoxesVisible() {
     if (hBox.getChildren().size() < 4) {
       garbageCheck = new VBox();
-      System.out.println(garbageCheck.getChildren().size());
-      System.out.println(vorlesungBox.getChildren().size());
       while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
         CheckBox box = new CheckBox();
         box.getStyleClass().add("checkBox");
@@ -545,7 +549,7 @@ public class Controller {
         garbageCheck.getChildren().add(box);
       }
       hBox.getChildren().add(0, garbageCheck);
-      selectAll.setVisible(true);
+      selectAllCBoxes.setVisible(true);
       //}
     }
   }
@@ -553,7 +557,7 @@ public class Controller {
   private void removeCheckboxes() {
     if (hBox.getChildren().size() > 3) {
       hBox.getChildren().remove(garbageCheck);
-      selectAll.setVisible(false);
+      selectAllCBoxes.setVisible(false);
     }
   }
 
@@ -601,7 +605,7 @@ public class Controller {
     }
     if (garbageFactor != 0) {
       setCheckBoxesVisible();
-      selectAll.setSelected(true);
+      selectAllCBoxes.setSelected(true);
     } else {
       removeCheckboxes();
     }
@@ -610,12 +614,12 @@ public class Controller {
   //TODO mit Pfeilen durch Felder navigieren
 
   @FXML
-  private void handleSelectAll() {
-    selectAll();
+  private void handleSelectAllCheckBoxes() {
+    selectAllCheckBoxes();
   }
 
-  private void selectAll() {
-    if (selectAll.isSelected()) {
+  private void selectAllCheckBoxes() {
+    if (selectAllCBoxes.isSelected()) {
       for (int i = 0; i < garbageCheck.getChildren().size(); i++) {
         CheckBox check = (CheckBox) garbageCheck.getChildren().get(i);
         check.setSelected(true);
