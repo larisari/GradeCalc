@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" afterDir="false" />
     </list>
@@ -152,7 +155,7 @@
       <workItem from="1582734911867" duration="44000" />
       <workItem from="1582736560213" duration="5173000" />
       <workItem from="1582817620401" duration="3422000" />
-      <workItem from="1582994184367" duration="3726000" />
+      <workItem from="1582994184367" duration="8614000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -434,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582997862460</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Refactoring and add some doc">
+      <created>1582998309877</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1582998309877</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="upload von vorgefertigten VL zu Studiengängen funktioniert" />
     <MESSAGE value="traversal funktioniert richtig" />
     <MESSAGE value="lösche aktuelle Zeile funktioniert" />
     <MESSAGE value="nicht gewertete Vorlesungen werden ausgegraut.&#10;Problem zurücksetzen auf schwarz funktioniert nicht." />
@@ -479,7 +488,8 @@
     <MESSAGE value="Fix empty grade txtfield exception" />
     <MESSAGE value="Fix checkboxes" />
     <MESSAGE value="clean up warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up warnings" />
+    <MESSAGE value="Refactoring and add some doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring and add some doc" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

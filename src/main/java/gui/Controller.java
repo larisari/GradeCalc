@@ -59,7 +59,6 @@ public class Controller {
   private double info120Factor = 0.15;
 
 
-
   @FXML
   public void handleAddNewTxtField() {
     addRow();
@@ -247,7 +246,7 @@ public class Controller {
         vorlesungBox.getChildren().remove(i);
         ectsBox.getChildren().remove(i);
         noteBox.getChildren().remove(i);
-        if (!garbageCheck.getChildren().isEmpty()) {
+        if (garbageCheck != null && !garbageCheck.getChildren().isEmpty()) {
           garbageCheck.getChildren().remove(i);
         }
         i -= 1;
@@ -347,8 +346,8 @@ public class Controller {
     if (selectedFile != null) {
       String counter = checkForDuplicate(selectedFile);
       Gson gson = new Gson();
-      try (FileWriter fileWriter = new FileWriter(selectedFile + counter
-          + ".json")) {
+
+      try (FileWriter fileWriter = new FileWriter(selectedFile + counter + ".json")) {
         JsonObject obj = new JsonObject();
         JsonArray arr = new Gson().toJsonTree(entries).getAsJsonArray();
         JsonPrimitive prim = new JsonPrimitive(garbageFactor);
@@ -362,8 +361,7 @@ public class Controller {
   }
 
   /**
-   * Checks if filename already exists.
-   * Adds a counter if it does.
+   * Checks if filename already exists. Adds a counter if it does.
    */
   private String checkForDuplicate(File file) {
     int counter = 0;
@@ -375,7 +373,6 @@ public class Controller {
       temp = new File(filename);
     }
     if (counter > 0) {
-      System.out.println(counter);
       return counter + "";
 
     }
@@ -388,10 +385,16 @@ public class Controller {
   @FXML
   private void handleLoadFile() {
     resetData();
+
+    File dir = new File(System.getProperty("user.home"), "GradeCalc/JSONs");
+    if (!dir.exists()) {
+      dir.mkdirs();
+    }
     FileChooser chooser = new FileChooser();
-    chooser.setInitialDirectory(new File("JSONs"));
+    chooser.setInitialDirectory(dir);
+    // chooser.setInitialDirectory(new File("JSONs"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
-    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSONs", "*.json"));
+    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GradeCalc/JSONs", "*.json"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
@@ -408,7 +411,7 @@ public class Controller {
   private void insertEntries(File file) {
     promptEntry.setVisible(false);
     Gson gson = new Gson();
-    try (FileReader fileReader = new FileReader("JSONs/" + file.getName())) {
+    try (FileReader fileReader = new FileReader(file)) {
       JsonObject obj = gson.fromJson(fileReader, JsonObject.class);
       JsonElement ele = obj.get("factor");
       setGarbageFactor(ele.getAsDouble());
@@ -497,6 +500,8 @@ public class Controller {
     resetGarbageFactor();
 
   }
+
+  //TODO: add jsons for predefined majors
 
   @FXML
   private void handleInfoComp() {

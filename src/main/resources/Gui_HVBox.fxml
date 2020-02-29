@@ -55,7 +55,7 @@
                   <Font size="56.0" />
                </font>
             </Label>
-            <MenuButton focusTraversable="false" layoutX="81.0" layoutY="15.0" mnemonicParsing="false" text="Studiengang">
+            <MenuButton disable="true" focusTraversable="false" layoutX="81.0" layoutY="15.0" mnemonicParsing="false" text="Studiengang">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleInfoComp" text="Informatik mit Computerlinguistik" />
                 <MenuItem mnemonicParsing="false" onAction="#handleMMI" text="Medieninformatik MMI" />
