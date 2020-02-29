@@ -28,7 +28,7 @@
               <items>
                 <MenuItem accelerator="Shortcut+D" mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" />
                   <MenuItem accelerator="Shortcut+I" mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" />
-                  <MenuItem accelerator="Shortcut+A" mnemonicParsing="false" onAction="#clearEntries" text="Lösche alle Einträge" />
+                  <MenuItem accelerator="Shortcut+A" mnemonicParsing="false" onAction="#resetGui" text="Zurücksetzen" />
               </items>
             </Menu>
       </menus>
@@ -77,7 +77,7 @@
             <Button alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="20.0" maxHeight="25.0" maxWidth="27.0" mnemonicParsing="false" onMouseClicked="#openGarbageInfo" prefHeight="25.0" prefWidth="27.0" style="-fx-background-radius: 5em; -fx-min-height: 18px; -fx-min-width: 18px; -fx-max-height: 18px; -fx-max-width: 18px; -fx-padding: 0px;" text="?" textAlignment="CENTER" textFill="#545353" />
             <MenuButton fx:id="garbageMenu" layoutX="397.0" layoutY="15.0" mnemonicParsing="false" text="Mülltonnenregelung">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#resetGarbageFactor" text="keine Mülltonnenregelung" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleResetGarbageFac" text="keine Mülltonnenregelung" />
                 <MenuItem mnemonicParsing="false" onAction="#setFactorMI" text="für Medieninformatik" />
                   <MenuItem mnemonicParsing="false" onAction="#setFactorInfo" text="für Informatik plus..." />
                   <MenuItem mnemonicParsing="false" onAction="#setFactorInfo150" text="für Informatik 150 ECTS" />

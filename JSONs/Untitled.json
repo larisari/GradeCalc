@@ -1,1 +1,1 @@
-{"entries":[{"name":"bla","note":0.0,"ects":3,"garbEligible":false,"discounted":false},{"name":"ls","note":0.0,"ects":2,"garbEligible":false,"discounted":false}],"factor":0.0}
+{"entries":[{"name":"bla1","note":1.0,"ects":3,"garbEligible":true,"discounted":false},{"name":"bla2","note":2.0,"ects":6,"garbEligible":true,"discounted":false},{"name":"bla3","note":1.0,"ects":9,"garbEligible":false,"discounted":false},{"name":"bla4","note":2.0,"ects":2,"garbEligible":true,"discounted":false}],"factor":0.166666667}

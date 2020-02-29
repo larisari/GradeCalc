@@ -60,6 +60,7 @@ public class Controller {
   private double info150Factor = 0.2;
   private double info120Factor = 0.15;
 
+  //TODO kompletter reset button
 
   /**
    * Handles user pressing the "+"-Button to add a new Row of Textfields.
@@ -85,10 +86,10 @@ public class Controller {
     setTraversalOrder(txt2, vBoxLength);
     setTraversalOrder(txt3, vBoxLength);
     if (garbageFactor > 0) {
-      setGarbageFactor(garbageFactor, true);
-/*      CheckBox box = new CheckBox();
+      setGarbageFactor(garbageFactor);
+      CheckBox box = new CheckBox();
       box.getStyleClass().add("checkBox");
-      garbageCheck.getChildren().add(box);*/
+      garbageCheck.getChildren().add(box);
     }
 
   }
@@ -135,15 +136,13 @@ public class Controller {
   @FXML
   private void handleRemoveTxtField(MouseEvent mouseEvent) {
 
-    if (vorlesungBox.getChildren().size() > 1) {
+    if (vorlesungBox.getChildren().size() > 0) {
       vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
       ectsBox.getChildren().remove(ectsBox.getChildren().size() - 1);
       noteBox.getChildren().remove(noteBox.getChildren().size() - 1);
       if (garbageFactor > 0) {
         garbageCheck.getChildren().remove(garbageCheck.getChildren().size() - 1);
       }
-    } else {
-      clear();
     }
   }
 
@@ -318,14 +317,18 @@ public class Controller {
     return false;
   }
 
-
-  private void reset() {
+  /*
+  Resets discounted entries to black.
+  Resets entries, garbagefactor and therefore checkboxes.
+   */
+  private void resetData() {
     if (!vorlesungBox.getChildren().isEmpty() && entries != null) {
       for (int i = 0; i < entries.size(); i++) {
         setTextColor(i, "black");
       }
     }
     entries = null;
+    resetGarbageFactor();
 
   }
 
@@ -335,8 +338,11 @@ public class Controller {
    */
   @FXML
   private void handleSaveFile(ActionEvent mouseEvent) {
+    deleteSuperfluousFields();
     saveEntries();
-
+    if (entries.isEmpty()) {
+      return;
+    }
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Speichere deine Datei ab.");
     Stage stage = (Stage) window.getScene().getWindow();
@@ -360,11 +366,11 @@ public class Controller {
 
   private String checkForDuplicate(File file) {
     int counter = 0;
-    File temp = new File(file.getPath() + ".xml");
+    File temp = new File(file.getPath() + ".json");
 
     while (temp.exists()) {
       counter++;
-      String filename = file.getPath() + counter + ".xml";
+      String filename = file.getPath() + counter + ".json";
       temp = new File(filename);
     }
     if (counter > 0) {
@@ -380,7 +386,7 @@ public class Controller {
    */
   @FXML
   private void handleLoadFile(ActionEvent mouseEvent) {
-    reset();
+    resetData();
     FileChooser chooser = new FileChooser();
     chooser.setInitialDirectory(new File("JSONs"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
@@ -389,7 +395,7 @@ public class Controller {
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
       insertEntries(selectedFile);
-      saveEntries();
+      //  saveEntries();
       deleteSuperfluousFields();
     }
   }
@@ -402,40 +408,33 @@ public class Controller {
   private void insertEntries(File file) {
     promptEntry.setVisible(false);
     Gson gson = new Gson();
-    List<Entry> uEntries = null;
+    //  List<Entry> uEntries = null;
     try (FileReader fileReader = new FileReader("JSONs/" + file.getName())) {
       JsonObject obj = gson.fromJson(fileReader, JsonObject.class);
       JsonElement ele = obj.get("factor");
-      garbageFactor = ele.getAsDouble();
+      setGarbageFactor(ele.getAsDouble());
       Type entryListType = new TypeToken<ArrayList<Entry>>() {
       }.getType();
-      uEntries = gson.fromJson(obj.get("entries"), entryListType);
+      entries = gson.fromJson(obj.get("entries"), entryListType);
     } catch (IOException e) {
       e.printStackTrace();
     }
     if (!vorlesungBox.getChildren().isEmpty()) {
       clear();
     }
-    if (uEntries != null) {
-      while (vorlesungBox.getChildren().size() < uEntries.size()) {
+    if (entries != null) {
+      while (vorlesungBox.getChildren().size() < entries.size()) {
         addRow();
       }
-      //check if checkboxes need to be added, best case O(1) if first entry is eligible for garbage rule
-      for (Entry entry : uEntries) {
-        if (entry.isGarbageEligible()) {
-          setCheckBoxesVisible();
-          break;
-        }
-      }
 
-      for (int i = 0; i < uEntries.size(); i++) {
+      for (int i = 0; i < entries.size(); i++) {
         TextField vorTxt = (TextField) vorlesungBox.getChildren().get(i);
         TextField ectsTxt = (TextField) ectsBox.getChildren().get(i);
         TextField noteTxt = (TextField) noteBox.getChildren().get(i);
-        vorTxt.setText(uEntries.get(i).getName());
-        ectsTxt.setText(uEntries.get(i).getECTS().toString());
-        noteTxt.setText(uEntries.get(i).getNote() + "");
-        if (uEntries.get(i).isGarbageEligible()) {
+        vorTxt.setText(entries.get(i).getName());
+        ectsTxt.setText(entries.get(i).getECTS().toString());
+        noteTxt.setText(entries.get(i).getNote() + "");
+        if (entries.get(i).isGarbageEligible()) {
           CheckBox box = (CheckBox) garbageCheck.getChildren().get(i);
           box.setSelected(true);
 
@@ -479,7 +478,7 @@ public class Controller {
    * Clears all Textfields.
    */
   @FXML
-  private void clearEntries(ActionEvent event) {
+  private void resetGui(ActionEvent event) {
     clear();
   }
 
@@ -494,31 +493,33 @@ public class Controller {
       removeCheckboxes();
     }
     finalGrade.setText("");
-    factorDisplay.setText("");
+    entries = null;
+    resetGarbageFactor();
+
   }
 
   @FXML
   private void handleInfoComp(ActionEvent actionEvent) {
     uploadFile("InfoPlusComp.xml");
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
   private void handleMMI(ActionEvent actionEvent) {
     uploadFile("MMI.xml");
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
   private void handleMG(ActionEvent actionEvent) {
     uploadFile("MedienGest.xml");
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
   private void handleMBWL(ActionEvent actionEvent) {
     uploadFile("MedienBWL.xml");
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
   }
 
   private void uploadFile(String filename) {
@@ -536,27 +537,20 @@ public class Controller {
       e.printStackTrace();
     }
   }
-/*
-  @FXML
-  private void enableGarbageBoxes(MouseEvent mouseEvent) {
-    if (garbageFactor > 0) {
-      setCheckBoxesVisible();
-    } else {
-      removeCheckboxes();
-      garbageFactor = 0;
-    }
-  }
 
- */
 //TODO problem mit überflüssigen checkboxen wenn abgehakt abgespeichert
+
   private void setCheckBoxesVisible() {
     //  if (garbageCheck == null || garbageCheck.getChildren()
     //    .isEmpty()) {     //könnte exception schmeißen, geht bei UPLOAD nicht hier rein weil garbageCheck nicht leer.
     if (hBox.getChildren().size() < 4) {
       garbageCheck = new VBox();
-      while (garbageCheck.getChildren().size() <= vorlesungBox.getChildren().size()) {
+      System.out.println(garbageCheck.getChildren().size());
+      System.out.println(vorlesungBox.getChildren().size());
+      while (garbageCheck.getChildren().size() < vorlesungBox.getChildren().size()) {
         CheckBox box = new CheckBox();
         box.getStyleClass().add("checkBox");
+        box.setSelected(true);
         garbageCheck.getChildren().add(box);
       }
       hBox.getChildren().add(0, garbageCheck);
@@ -574,35 +568,36 @@ public class Controller {
 
   @FXML
   private void setFactorMI(ActionEvent actionEvent) {
-    /*MenuItem mItem = (MenuItem) actionEvent.getSource();
-    String text = mItem.getText();
-    garbageMenu.setText(text);
-    */
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
 
   }
 
   @FXML
   private void setFactorInfo(ActionEvent actionEvent) {
-    setGarbageFactor(infoMMIFactor, true);
+    setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
   private void setFactorInfo150(ActionEvent actionEvent) {
-    setGarbageFactor(info150Factor, true);
+    setGarbageFactor(info150Factor);
   }
 
   @FXML
   private void setFactorInfo120(ActionEvent actionEvent) {
-    setGarbageFactor(info120Factor, true);
+    setGarbageFactor(info120Factor);
   }
 
   @FXML
-  private void resetGarbageFactor(ActionEvent actionEvent) {
-    setGarbageFactor(0, false);
+  private void handleResetGarbageFac(ActionEvent actionEvent) {
+    resetGarbageFactor();
+
   }
 
-  private void setGarbageFactor(double gFactor, boolean setBoxes) {
+  private void resetGarbageFactor() {
+    setGarbageFactor(0);
+  }
+
+  private void setGarbageFactor(double gFactor) {
     garbageFactor = gFactor;
     if (garbageFactor == infoMMIFactor) {
       factorDisplay.setText("Faktor: 1/6");
@@ -613,8 +608,9 @@ public class Controller {
     } else {
       factorDisplay.setText("");
     }
-    if (setBoxes) {
+    if (garbageFactor != 0) {
       setCheckBoxesVisible();
+      selectAll.setSelected(true);
     } else {
       removeCheckboxes();
     }
