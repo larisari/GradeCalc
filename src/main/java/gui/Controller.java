@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -25,7 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -60,13 +58,12 @@ public class Controller {
   private double info150Factor = 0.2;
   private double info120Factor = 0.15;
 
-  //TODO kompletter reset button
 
   /**
    * Handles user pressing the "+"-Button to add a new Row of Textfields.
    */
   @FXML
-  public void handleAddNewTxtField(MouseEvent mouseEvent) {
+  public void handleAddNewTxtField() {
     addRow();
   }
 
@@ -134,7 +131,7 @@ public class Controller {
    * Removes a row of TextFields.
    */
   @FXML
-  private void handleRemoveTxtField(MouseEvent mouseEvent) {
+  private void handleRemoveTxtField() {
 
     if (vorlesungBox.getChildren().size() > 0) {
       vorlesungBox.getChildren().remove(vorlesungBox.getChildren().size() - 1);
@@ -150,7 +147,7 @@ public class Controller {
    * Deletes row currently focused and sets focus on TextField underneath.
    */
   @FXML
-  private void deleteCurrRow(ActionEvent actionEvent) {
+  private void deleteCurrRow() {
     Scene scene = window.getScene();
     if (scene.focusOwnerProperty().get() instanceof TextField) {
       TextField textField = (TextField) scene.focusOwnerProperty().get();
@@ -190,7 +187,7 @@ public class Controller {
    * Adds new row under currently focused row.
    */
   @FXML
-  private void addUnderCurrRow(ActionEvent actionEvent) {
+  private void addUnderCurrRow() {
     Scene scene = window.getScene();
     if (scene.focusOwnerProperty().get() instanceof TextField) {
       TextField textField = (TextField) scene.focusOwnerProperty().get();
@@ -224,7 +221,7 @@ public class Controller {
    * rule.
    */
   @FXML
-  private void handleCalcGrade(MouseEvent mouseEvent) {
+  private void handleCalcGrade() {
     saveEntries();
     for (int i = 0; i < entries.size(); i++) {
       setTextColor(i, "black");
@@ -257,15 +254,11 @@ public class Controller {
     }
   }
 
-  //TODO discount wird nicht mehr gesetzt
-
   private void highlightCountedGrades() {
     for (int i = 0; i < entries.size(); i++) {
       if (entries.get(i).isDiscounted()) {
         setTextColor(i, "#9c9c9c");
-      } /*else {
-        setTextColor(i, "black");
-      }*/
+      }
     }
   }
 
@@ -337,7 +330,7 @@ public class Controller {
    * Handles user pressing "Save as". Saves user input as json file to local directory.
    */
   @FXML
-  private void handleSaveFile(ActionEvent mouseEvent) {
+  private void handleSaveFile() {
     deleteSuperfluousFields();
     saveEntries();
     if (entries.isEmpty()) {
@@ -385,7 +378,7 @@ public class Controller {
    * Handles user pressing Upload. Uploads saved json file.
    */
   @FXML
-  private void handleLoadFile(ActionEvent mouseEvent) {
+  private void handleLoadFile() {
     resetData();
     FileChooser chooser = new FileChooser();
     chooser.setInitialDirectory(new File("JSONs"));
@@ -457,7 +450,7 @@ public class Controller {
           && isECTS(ectsTxt.getText())) {
         double note = 0;
         if (!noteTxt.getText().isEmpty()) {
-          note = Double.valueOf(noteTxt.getText());
+          note = Double.parseDouble(noteTxt.getText());
         }
 
         Entry entry = new Entry(vorTxt.getText(), note, Integer.parseInt(ectsTxt.getText()));
@@ -478,7 +471,7 @@ public class Controller {
    * Clears all Textfields.
    */
   @FXML
-  private void resetGui(ActionEvent event) {
+  private void resetGui() {
     clear();
   }
 
@@ -499,25 +492,25 @@ public class Controller {
   }
 
   @FXML
-  private void handleInfoComp(ActionEvent actionEvent) {
+  private void handleInfoComp() {
     uploadFile("InfoPlusComp.xml");
     setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
-  private void handleMMI(ActionEvent actionEvent) {
+  private void handleMMI() {
     uploadFile("MMI.xml");
     setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
-  private void handleMG(ActionEvent actionEvent) {
+  private void handleMG() {
     uploadFile("MedienGest.xml");
     setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
-  private void handleMBWL(ActionEvent actionEvent) {
+  private void handleMBWL() {
     uploadFile("MedienBWL.xml");
     setGarbageFactor(infoMMIFactor);
   }
@@ -529,7 +522,7 @@ public class Controller {
   }
 
   @FXML
-  private void openGarbageInfo(MouseEvent mouseEvent) {
+  private void openGarbageInfo() {
     String url = "http://www2.tcs.ifi.lmu.de/~letz/informationen.shtml#Muelltonnenregelung";
     try {
       Desktop.getDesktop().browse(new URL(url).toURI());
@@ -541,8 +534,6 @@ public class Controller {
 //TODO problem mit überflüssigen checkboxen wenn abgehakt abgespeichert
 
   private void setCheckBoxesVisible() {
-    //  if (garbageCheck == null || garbageCheck.getChildren()
-    //    .isEmpty()) {     //könnte exception schmeißen, geht bei UPLOAD nicht hier rein weil garbageCheck nicht leer.
     if (hBox.getChildren().size() < 4) {
       garbageCheck = new VBox();
       System.out.println(garbageCheck.getChildren().size());
@@ -567,28 +558,28 @@ public class Controller {
   }
 
   @FXML
-  private void setFactorMI(ActionEvent actionEvent) {
+  private void setFactorMI() {
     setGarbageFactor(infoMMIFactor);
 
   }
 
   @FXML
-  private void setFactorInfo(ActionEvent actionEvent) {
+  private void setFactorInfo() {
     setGarbageFactor(infoMMIFactor);
   }
 
   @FXML
-  private void setFactorInfo150(ActionEvent actionEvent) {
+  private void setFactorInfo150() {
     setGarbageFactor(info150Factor);
   }
 
   @FXML
-  private void setFactorInfo120(ActionEvent actionEvent) {
+  private void setFactorInfo120() {
     setGarbageFactor(info120Factor);
   }
 
   @FXML
-  private void handleResetGarbageFac(ActionEvent actionEvent) {
+  private void handleResetGarbageFac() {
     resetGarbageFactor();
 
   }
@@ -619,7 +610,7 @@ public class Controller {
   //TODO mit Pfeilen durch Felder navigieren
 
   @FXML
-  private void handleSelectAll(MouseEvent mouseEvent) {
+  private void handleSelectAll() {
     selectAll();
   }
 

@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="Fix empty grade txtfield exception">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONs/Untitled.json" beforeDir="false" afterPath="$PROJECT_DIR$/JSONs/Untitled.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONs/Untitled2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONs/blub.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSONs/blubbediblub.json" beforeDir="false" />
+    <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +151,7 @@
       <workItem from="1582734911867" duration="44000" />
       <workItem from="1582736560213" duration="5173000" />
       <workItem from="1582817620401" duration="3422000" />
-      <workItem from="1582994184367" duration="2898000" />
+      <workItem from="1582994184367" duration="3292000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -425,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582818063092</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Fix checkboxes">
+      <created>1582997425711</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1582997425711</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +446,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added &quot;save as&quot; function" />
     <MESSAGE value="mülltonne wird jetzt richtig berechnet" />
     <MESSAGE value="upload von vorgefertigten VL zu Studiengängen funktioniert" />
     <MESSAGE value="traversal funktioniert richtig" />
@@ -470,23 +470,8 @@
     <MESSAGE value="also save garbagefactor in json" />
     <MESSAGE value="add json folder" />
     <MESSAGE value="Fix empty grade txtfield exception" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix empty grade txtfield exception" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gui/Controller.java</url>
-          <line>462</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gui/Controller.java</url>
-          <line>341</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fix checkboxes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix checkboxes" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
