@@ -340,6 +340,7 @@ public class Controller {
       return;
     }
     FileChooser chooser = new FileChooser();
+    chooser.setInitialDirectory(new File(System.getProperty("user.home"), "GradeCalc/JSONs"));
     chooser.setTitle("Speichere deine Datei ab.");
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showSaveDialog(stage);
@@ -394,7 +395,7 @@ public class Controller {
     chooser.setInitialDirectory(dir);
     // chooser.setInitialDirectory(new File("JSONs"));
     chooser.setTitle("Wähle Datei aus, die du laden möchtest");
-    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GradeCalc/JSONs", "*.json"));
+    chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json"));
     Stage stage = (Stage) window.getScene().getWindow();
     File selectedFile = chooser.showOpenDialog(stage);
     if (selectedFile != null) {
@@ -502,6 +503,7 @@ public class Controller {
   }
 
   //TODO: add jsons for predefined majors
+  //TODO: update to javafx 12 to eliminate assertion failures
 
   @FXML
   private void handleInfoComp() {
