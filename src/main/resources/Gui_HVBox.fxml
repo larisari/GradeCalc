@@ -26,8 +26,6 @@
         </Menu>
             <Menu mnemonicParsing="false" text="Bearbeiten">
               <items>
-                <MenuItem accelerator="Shortcut+D" mnemonicParsing="false" onAction="#deleteCurrRow" text="Lösche aktuelle Zeile" />
-                  <MenuItem accelerator="Shortcut+I" mnemonicParsing="false" onAction="#addUnderCurrRow" text="Zeile einfügen" />
                   <MenuItem accelerator="Shortcut+A" mnemonicParsing="false" onAction="#resetGui" text="Zurücksetzen" />
               </items>
             </Menu>
@@ -63,12 +61,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleMBWL" text="Medieninformatik BWL" />
               </items>
             </MenuButton>
-            <Button fx:id="plusButton1" alignment="CENTER" focusTraversable="false" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleAddNewTxtField" text="+">
+            <Button fx:id="plusButton1" alignment="CENTER" focusTraversable="false" layoutX="81.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#addUnderCurrRow" text="+">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button fx:id="minusButton" alignment="CENTER" focusTraversable="false" layoutX="120.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#handleRemoveTxtField" prefHeight="34.0" prefWidth="36.0" text="-">
+            <Button fx:id="minusButton" alignment="CENTER" focusTraversable="false" layoutX="120.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#deleteCurrRow" prefHeight="34.0" prefWidth="36.0" text="-">
                <font>
                   <Font size="17.0" />
                </font>

@@ -58,12 +58,12 @@ public class Controller {
   private double info150Factor = 0.2;
   private double info120Factor = 0.15;
 
-
+/** handle + button
   @FXML
   public void handleAddNewTxtField() {
     addRow();
   }
-
+**/
   /**
    * Adds a new row of TextFields.
    */
@@ -125,8 +125,9 @@ public class Controller {
   }
 
   /**
-   * Removes a row of TextFields.
+   * Removes the last row of TextFields. (handle minus button)
    */
+  /**
   @FXML
   private void handleRemoveTxtField() {
 
@@ -139,6 +140,7 @@ public class Controller {
       }
     }
   }
+**/
 
   /**
    * Deletes row currently focused and sets focus on TextField underneath.

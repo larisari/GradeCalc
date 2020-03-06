@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f4caed51-cff0-4399-8f0a-4799e0d878cf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Gui_HVBox.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +154,7 @@
       <workItem from="1582736560213" duration="5173000" />
       <workItem from="1582817620401" duration="3422000" />
       <workItem from="1582994184367" duration="8767000" />
-      <workItem from="1583501427293" duration="2759000" />
+      <workItem from="1583501427293" duration="3273000" />
     </task>
     <task id="LOCAL-00001" summary="added xStream">
       <created>1571695242323</created>
@@ -450,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583003753131</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Load and save json from/to any folder">
+      <created>1583504559843</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1583504559843</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="lösche aktuelle Zeile funktioniert" />
     <MESSAGE value="nicht gewertete Vorlesungen werden ausgegraut.&#10;Problem zurücksetzen auf schwarz funktioniert nicht." />
     <MESSAGE value="text schwarz/ausgegraut problem gelöst" />
     <MESSAGE value="überflüssige zeilen werden bei berechnung oder neuem upload gelöscht" />
@@ -495,14 +501,15 @@
     <MESSAGE value="clean up warnings" />
     <MESSAGE value="Refactoring and add some doc" />
     <MESSAGE value="Adapt paths for jar use" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adapt paths for jar use" />
+    <MESSAGE value="Load and save json from/to any folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load and save json from/to any folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/gui/Controller.java</url>
-          <line>386</line>
+          <line>388</line>
           <properties class="gui.Controller" method="handleLoadFile">
             <option name="EMULATED" value="true" />
           </properties>
